@@ -1,0 +1,77 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Login
+{% endblock %}
+{% block head_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/user_center.css' %}">
+{% endblock %}
+{% block body_block %}
+    <div class="content content-nav-base commodity-content">
+    <div class="commod-cont-wrap">
+        <div class="commod-cont w1200 layui-clear">
+            <div class="left-nav">
+                <div class="title">User Center</div>
+                <div class="list-box" id="sort">
+                    <dd><a href="/list_bought.html">My Orders</a></dd>
+                    <dd><a href="/me.html">Profile</a></dd>
+                </div>
+            </div>
+            <div class="right-cont-wrap">
+                <div class="right-cont">
+                    <div class="cont-list layui-clear">
+                        <div id="user_center">
+                            <div class="title">
+                                <table>
+                                    <tr>
+                                        <td width="730px">Books</td>
+                                        <td width="120px">Price</td>
+                                        <td width="100px">Number</td>
+                                        <td width="140px">Total</td>
+                                        <td width="110px">Status</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="tables">
+                                <div class="table status_pay">
+                                    <div class="head">
+                                        <span class="time"></span> <span class="text">Order No：
+						</span> <span class="orderId"> {{ item.id }} </span> <span class="status">Not Completed</span>
+                                    </div>
+                                    <table>
+                                        <tr>
+                                            <td class="image"><img width="190px;height:190px;"
+                                                                   src="{{ item.productPic }}" alt=""></td>
+                                            <td class="info" width="540px">
+                                                <div>Book：Book name</div>
+                                                <br>
+                                                <div>Author: Author name</div>
+                                                <div>Address：XXXXX</div>
+                                            </td>
+                                            <td class="price" width="120px">50.00</td>
+                                            <td class="amount" width="100px">1</td>
+                                            <td class="pay" width="140px" rowspan="1">
+                                                <div class="money">￡ 50.00</div>
+                                                <div>（DHL）</div>
+                                            </td>
+                                            <td class="operate" width="110px" rowspan="1">
+
+                                                <div>
+                                                    <a class="btn" href="#">Finished</a>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

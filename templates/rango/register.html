@@ -1,22 +1,37 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
-
 {% block title_block %}
     Register
 {% endblock %}
-
 {% block body_block %}
-    <h1>Register for Rango</h1>
-    {% if registered %}
-        Rango says: <strong>thank you for registering!</strong>
-        <a href="{% url 'rango:index' %}">Return to the homepage.</a><br />
-    {% else %}
-        Rango says: <strong>register here!</strong><br />
-        <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ user_form.as_p }}
-            {{ profile_form.as_p }}
-            <input type="submit" name="submit" value="Register" />
-        </form>
-    {% endif %}
+    <div class="content content-nav-base  login-content">
+    <div class="login-bg">
+        <div class="login-cont w1200">
+            <div class="form-box">
+                <form class="layui-form" action="{% url 'rango:register' %}">
+                    <legend>User Register</legend>
+                    <div class="layui-form-item">
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-username iphone-icon"></i>
+                                <input type="text" name="username" id="username" lay-verify="required" placeholder="Your Username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline veri-code">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-password iphone-icon"></i>
+                                <input style="padding-left: 40px;" id="password" type="password" name="password" lay-verify="required" placeholder="Your Password" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item login-btn">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="register">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

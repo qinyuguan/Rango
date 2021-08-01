@@ -1,0 +1,58 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Book name
+{% endblock %}
+{% block body_block %}
+<div class="content content-nav-base datails-content">
+
+    <div class="data-cont-wrap w1200">
+        <div class="crumb">
+            <a href="javascript:;">Home Page</a>
+            <span>></span>
+            <a href="javascript:;">All Products</a>
+            <span>></span>
+            <a href="javascript:;">Product detail</a>
+        </div>
+        <div class="product-intro layui-clear" id="intro">
+            <form class="layui-form">
+                <input type="hidden" name="productId" value="{{d.id}}">
+                <div class="preview-wrap">
+                    <a href="javascript:;"><img style="width: 390px;height:390px" src="{{d.pic}}"></a>
+                </div>
+                <div class="itemInfo-wrap">
+                    <div class="itemInfo">
+                        <div class="title">
+                            <h4>Book Name </h4>
+                        </div>
+                        <div class="summary">
+                            <p class="activity"><span>Current Price</span><strong class="price"><i>￡</i>50</strong></p>
+                            <p class="address-box"><span>Shipment</span><strong class="address">DHL</strong>
+                            </p>
+                            <p class="address-box"><span>Rate</span><strong class="address">4.9/5.0</strong>
+                            </p>
+                        </div>
+                        <div class="choose-attrs">
+                            <div class="number layui-clear"><span class="title">Number</span>
+                                <div class="number-cont"><span class="cut btn" onclick="minus();">-</span>
+                                    <input
+                                            onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                            onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+                                            maxlength="4" type="" name="amount" id="number" value="1">
+                                    <span class="add btn" onclick="add();">+</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="choose-btns">
+                            <button class="layui-btn layui-btn-primary purchase-btn" lay-submit="" lay-filter="buy">Add to cart</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

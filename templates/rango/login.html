@@ -4,13 +4,34 @@
     Login
 {% endblock %}
 {% block body_block %}
-    <h1>Login to Rango</h1>
-    <form id="login_form" method="post" action="{% url 'rango:login' %}">
-        {% csrf_token %}
-        Username: <input type="text" name="username" value="" size="50" />
-        <br />
-        Password: <input type="password" name="password" value="" size="50" />
-        <br />
-        <input type="submit" value="submit" />
-    </form>
+    <div class="content content-nav-base  login-content">
+    <div class="login-bg">
+        <div class="login-cont w1200">
+            <div class="form-box">
+                <form class="layui-form" action="{% url 'rango:login' %}">
+                    <legend>User Login</legend>
+                    <div class="layui-form-item">
+                        <div class="layui-inline iphone">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-username iphone-icon"></i>
+                                <input type="text" name="username" id="username" lay-verify="required" placeholder="Your Username" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline veri-code">
+                            <div class="layui-input-inline">
+                                <i class="layui-icon layui-icon-password iphone-icon"></i>
+                                <input style="padding-left: 40px;" id="password" type="password" name="password" lay-verify="required" placeholder="Your Password" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item login-btn">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" lay-submit="" lay-filter="login">Login</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
 {% endblock %}

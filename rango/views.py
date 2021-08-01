@@ -174,3 +174,14 @@ def visitor_cookie_handler(request):
     else:
         request.session['last_visit'] = last_visit_cookie
     request.session['visits'] = visits
+
+
+
+def products(request):
+    return render(request, 'rango/products.html')
+
+def product(request):
+    return render(request, 'rango/product.html')
+
+def bought(request):
+    return render(request, 'rango/bought.html')
