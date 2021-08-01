@@ -39,7 +39,7 @@
 }
 
 #user_center .title {
-	width: 1200px;
+	width: 940px;
 	height: 50px;
 	margin: 0 auto;
 	border: 1px solid rgb(232, 232, 232);
@@ -53,7 +53,7 @@
 }
 
 #user_center .tables {
-	width: 1200px;
+	width: 940px;
 	margin: 0 auto;
 }
 
@@ -78,7 +78,6 @@
 #user_center .tables .table .head .status {
 	font-size: 15px;
 	font-weight: bold;
-	margin-right: 35px;
 	color: red;
 	float: right;
 }
@@ -89,18 +88,20 @@
 }
 
 #user_center .tables table .image img {
-	width: 120px;
-	height: 120px;
+	width: 74px;
+	height: 74px;
 	margin-left: 20px;
 	margin-right: 5px;
 }
 
 #user_center .tables table .price {
 	text-align: center;
+	border-left: 2px solid rgb(241, 241, 241);
 }
 
 #user_center .tables table .amount {
 	text-align: center;
+	border-left: 2px solid rgb(241, 241, 241);
 }
 
 #user_center .tables table .pay {
@@ -111,6 +112,7 @@
 #user_center .tables .pay .money {
 	font-weight: bold;
 	font-size: 18px;
+
 }
 
 #user_center .tables table .operate {

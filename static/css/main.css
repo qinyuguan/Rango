@@ -1,10 +1,11 @@
 
 body {
     font-family: "Microsoft YaHei", "SimSun", '\5b8b\4f53', sans-serif;
+    min-width: 1200px;
 }
 
 .w1200 {
-    width: 100%;
+    min-width: 1200px;
     margin: 0 auto;
 }
 
@@ -42,6 +43,7 @@ i {
 
 .sn-back-home {
     float: left;
+    padding-left: 10%;
 }
 
 .sn-back-home i {
@@ -83,7 +85,7 @@ i {
 }
 
 .header .mallLogo {
-    margin-left: 38px;
+    /*margin-left: 100px;*/
     float: left;
 }
 
@@ -588,7 +590,7 @@ i {
 }
 
 .commodity-content .commod-cont .right-cont {
-    width: 1000px;
+    width: 940px;
 }
 
 .commodity-content .commod-cont .right-cont .sort {
@@ -625,7 +627,7 @@ i {
     height: 366px;
     border: 1px solid #eaeaea;
     background: #fff;
-    margin: 0 47px 60px 0;
+    margin: 0 25px 60px 0;
 }
 
 .commodity-content .commod-cont .right-cont .cont-list .item .img {
@@ -685,6 +687,7 @@ i {
 
 .datails-content .product-intro {
     margin-bottom: 85px;
+    margin-left: 10%;
 }
 
 .datails-content .product-intro .preview-wrap {
