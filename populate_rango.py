@@ -117,7 +117,7 @@ if __name__ == '__main__':
 
         title = html.xpath("//*[@id='content']/div[2]/div[2]/div[1]/h1")[0].text
         author = html.xpath("//*[@itemprop='author']//*[@itemprop='name']")[0].text
-        img = html.xpath("//*[@id='content']/div[2]/div[2]/div[2]/div/a/img")[0].attrib['src']
+        img = html.xpath("//*[@id='content']/div[2]/div[2]/div[2]/div/a/img")[0].attrib['src'].split('?')[0]
         price = html.xpath("//div[@itemprop='offers']/b")[0].text
         publisher = html.xpath("//div[@itemprop=\"publisher\"]")[0].text
         publish_date = html.xpath("//div[@itemprop=\"datePublished\"]")[0].text
