@@ -13,12 +13,8 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Popular</h3></div>
                 <div class="booklist">
-
-                    <ul>
                         {% if book_list %}
                             {% for book in book_list %}
-
-                                <li>
                                     <div class="book">
                                         <div class="book-img">
                                             <div class="book-img-cover">
@@ -44,7 +40,6 @@
                                         </div>
 
                                     </div>
-                                </li>
                             {% endfor %}
 
                         {% endif %}
