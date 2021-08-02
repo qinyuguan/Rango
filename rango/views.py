@@ -7,8 +7,10 @@ from django.urls import reverse
 from django.http import HttpResponse
 from rango.models import Category
 from rango.models import Page
+from rango.models import BookDetail
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
+
 
 def index(request):
     category_list = Category.objects.order_by('-likes')[:5]
@@ -21,6 +23,7 @@ def index(request):
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
+
 def about(request):
     if request.session.test_cookie_worked():
         print("TEST COOKIE WORKED!")
@@ -29,10 +32,6 @@ def about(request):
     visitor_cookie_handler(request)
     context_dict['visits'] = request.session['visits']
     return render(request, 'rango/about.html', context_dict)
-
-
-
-
 
 
 def show_category(request, category_name_slug):
@@ -63,6 +62,7 @@ def add_category(request):
             print(form.errors)
     return render(request, 'rango/add_category.html', {'form': form})
 
+
 @login_required
 def add_page(request, category_name_slug):
     try:
@@ -85,7 +85,7 @@ def add_page(request, category_name_slug):
 
                 return redirect(reverse('rango:show_category',
                                         kwargs={'category_name_slug':
-                                                category_name_slug}))
+                                                    category_name_slug}))
         else:
             print(form.errors)
     context_dict = {'form': form, 'category': category}
@@ -111,15 +111,14 @@ def register(request):
             profile.save()
             registered = True
         else:
-            print(user_form.errors,profile_form.errors)
+            print(user_form.errors, profile_form.errors)
     else:
         user_form = UserForm()
         profile_form = UserProfileForm()
     return render(request, 'rango/register.html',
-                  context= {'user_form': user_form,
-                            'profile_form': profile_form,
-                            'registered': registered})
-
+                  context={'user_form': user_form,
+                           'profile_form': profile_form,
+                           'registered': registered})
 
 
 def user_login(request):
@@ -146,6 +145,7 @@ def some_view(request):
     else:
         return HttpResponse("You are not logged in.")
 
+
 @login_required
 def restricted(request):
     return render(request, 'rango/restricted.html')
@@ -163,12 +163,13 @@ def get_server_side_cookie(request, cookie, default_val=None):
         val = default_val
     return val
 
+
 def visitor_cookie_handler(request):
     visits = int(get_server_side_cookie(request, 'visits', '1'))
     last_visit_cookie = get_server_side_cookie(request, 'last_visit', str(datetime.now()))
     print(last_visit_cookie)
     last_visit_time = datetime.strptime(last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')
-    if(datetime.now() - last_visit_time).days > 0:
+    if (datetime.now() - last_visit_time).days > 0:
         visits = visits + 1
         request.session['last_visit'] = str(datetime.now())
     else:
@@ -176,21 +177,27 @@ def visitor_cookie_handler(request):
     request.session['visits'] = visits
 
 
-
 def products(request):
-    return render(request, 'rango/products.html')
+    book_list = BookDetail.objects.order_by('title')[:20]
+    context_dict = {'book_list': book_list}
+    return render(request, 'rango/products.html', context=context_dict)
+
 
 def product(request):
     return render(request, 'rango/product.html')
 
+
 def bought(request):
     return render(request, 'rango/bought.html')
+
 
 def profile(request):
     return render(request, 'rango/profile.html')
 
+
 def users(request):
     return render(request, 'rango/users.html')
+
 
 def add_address(request):
     return render(request, 'rango/add_address.html')
