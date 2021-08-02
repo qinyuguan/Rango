@@ -4,107 +4,220 @@
     Products
 {% endblock %}
 {% block body_block %}
-    <div class="content content-nav-base commodity-content">
-    <div class="commod-cont-wrap" style="display: flex; justify-content: center;">
-        <div class="commod-cont w1200 layui-clear" >
-            <div class="left-nav">
-                <div class="title">Categories</div>
-                <div class="list-box" id="sort">
-                    <dd><a href="/index.html">All</a></dd>
-                    <dd><a href="/index.html">Category1</a></dd>
-                    <dd><a href="/index.html">Category2</a></dd>
-                </div>
-            </div>
-            <div class="right-cont-wrap">
-                <div class="right-cont">
-{#                    <div class="sort layui-clear">#}
-{#                       <a class="active" href="javascript:;" event = 'volume'>销量</a>#}
-{#                       <a href="javascript:;" event = 'price'>价格</a>#}
-{#                       <a href="javascript:;" event = 'newprod'>新品</a>#}
-{#                       <a href="javascript:;" event = 'collection'>收藏</a>#}
-{#                   </div>#}
-                    <div class="prod-number">
-                        <span id="res"></span>
+{% block head_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
+{% endblock %}
+<div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Popular</h3></div>
+                <div class="booklist">
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <a href="{% url 'rango:product' %}"><img src="https://images-eu.bookshop.org/product-images/images/9780349701479.jpg?width=170&amp;height=255&amp;v=v2"></a>
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            This is a long text to test if text is too long
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
+
                     </div>
-                    <div class="cont-list layui-clear" id="list-cont">
-                        <div class="item">
-                          <div class="img" >
-                            <a href="{% url 'rango:product' %}">
-                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
-                            </a>
-                          </div>
-                          <div class="text">
-                            <p class="title">Book name</p>``
-                            <p class="price">
-                              <span class="pri">Rate : 4.9 / 5</span>
-                              <span class="nub">Author Name</span>
-                            </p>
-                          </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <a href="{% url 'rango:product' %}">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780008365912.jpg?width=170&amp;height=255&amp;v=v2">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            Short text
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
                         </div>
 
-                        <div class="item">
-                          <div class="img" >
-                            <a href="{% url 'rango:product' %}">
-                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
-                            </a>
-                          </div>
-                          <div class="text">
-                            <p class="title">Book name</p>
-                            <p class="price">
-                              <span class="pri">Rate : 4.9 / 5</span>
-                              <span class="nub">Author Name</span>
-                            </p>
-                          </div>
-                        </div>
-
-
-                        <div class="item">
-                          <div class="img" >
-                            <a href="{% url 'rango:product' %}">
-                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
-                            </a>
-                          </div>
-                          <div class="text">
-                            <p class="title">Book name</p>
-                            <p class="price">
-                              <span class="pri">Rate : 4.9 / 5</span>
-                              <span class="nub">Author Name</span>
-                            </p>
-                          </div>
-                        </div>
                     </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780349701479.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            This is a long text to test if text is too long
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
 
-{#                    <script type="text/html" id="productListTpl">#}
-{#                      {{# layui.each(d.data,function(index,item){}}#}
-{#                        <div class="item">#}
-{#                          <div class="img" >#}
-{#                            <a href="{% url 'rango:product' %}">#}
-{#                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="加载失败" onerror="this.src='/res/static/img/error.jpg';this.onerror='';"/>#}
-{#                            </a>#}
-{#                          </div>#}
-{#                          <div class="text">#}
-{#                            <p class="title">{{item.name}}</p>#}
-{#                            <p class="price">#}
-{#                              <span class="pri">{{item.price}} 元</span>#}
-{#                              <span class="nub">{{item.description}}</span>#}
-{#                            </p>#}
-{#                          </div>#}
-{#                        </div>#}
-{#                      {{# }); }}#}
-{#                    </script>#}
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780008365912.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            Short text
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
 
-{#                    <script type="text/html" id="sortListTpl">#}
-{#                        {{# layui.each(d,function(index,item){}}#}
-{#                        <dd><a href="?sort={{item}}">{{item}}</a></dd>#}
-{#                        {{# }); }}#}
-{#                    </script>#}
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780349701479.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            This is a long text to test if text is too long
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
 
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780008365912.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            Short text
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
 
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780349701479.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            This is a long text to test if text is too long
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
 
-                    <div id="demo0" style="text-align: center;"></div>
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780008365912.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            Short text
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
+
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780349701479.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            This is a long text to test if text is too long
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
+
+                    </div>
+                    <div class="book">
+                        <div class="book-img">
+                            <div class="book-img-cover">
+                                <img src="https://images-eu.bookshop.org/product-images/images/9780008365912.jpg?width=170&amp;height=255&amp;v=v2">
+                            </div>
+                        </div>
+                        <div class="book-title">
+                            Short text
+                        </div>
+                        <div class="book-author">
+                            Joshua Bloch
+                        </div>
+                        <div class="book-price">
+                            £40.49
+                        </div>
+                        <div class="book-add">
+                            <div style="background-color: #DE2454;border-radius: 15px;" class="layui-btn layui-btn-danger"><i class="layui-icon layui-icon-cart-simple"></i> ADD TO BASKET</div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+
 </div>
 {% endblock %}
