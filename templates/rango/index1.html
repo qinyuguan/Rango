@@ -1,0 +1,60 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Homepage
+{% endblock %}
+
+
+
+{% block body_block %}
+<div class="content content-nav-base buytoday-content">
+    <div class="footer-wrap">
+        <div class="footer w1200">
+            <div class="title">
+                <h3>TOP 3 POPULAR BOOKS</h3>
+            </div>
+            <div class="list-box layui-clear" style="display: flex; justify-content: center;" id="footerList">
+                <div class="item">
+                    <a href="/product.html?p={{item.id}}">
+                        <img src="" style="width: 320px;height: 450px;" alt="" />
+                    </a>
+                    <div class="text">
+                        <div class="right-title-number">1</div>
+                        <div class="commod">
+                            <p>name</p>
+                            <span>3000 Likes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="/product.html?p={{item.id}}">
+                        <img src="" style="width: 320px;height: 450px;" alt="" />
+                    </a>
+                    <div class="text">
+                        <div class="right-title-number">2</div>
+                        <div class="commod">
+                            <p>name</p>
+                            <span>3000 Likes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="/product.html?p={{item.id}}">
+                        <img src="" style="width: 320px;height: 450px;" alt="" />
+                    </a>
+                    <div class="text">
+                        <div class="right-title-number">3</div>
+                        <div class="commod">
+                            <p>name</p>
+                            <span>3000 Likes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

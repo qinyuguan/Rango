@@ -1039,16 +1039,17 @@ i {
 }
 
 .buytoday-content .footer-wrap, .buytoday-content .footer {
-    background: #877dd2;
+    background: white;
 }
 
-.buytoday-content .footer-wrap, .buytoday-content .footer .title {
-    font-size: 30px;
-    color: #fffaea;
+.buytoday-content .footer-wrap, .buytoday-content .footer .title h3{
+    color: black;
     text-align: center;
+    font: 46px "GT Super Bold", serif;
+    font-weight: bolder;
 }
 
-.buytoday-content .footer .title h3 {
+.buytoday-content .footer .title h3{
     padding: 60px 0;
 }
 

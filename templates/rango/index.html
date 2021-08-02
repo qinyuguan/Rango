@@ -1,4 +1,4 @@
-{% extends 'rango/base.html' %}
+{% extends 'rango/base_home.html' %}
 {% load staticfiles %}
 
 {% block title_block %}
@@ -6,55 +6,57 @@
 {% endblock %}
 
 
-
 {% block body_block %}
-<div class="content content-nav-base buytoday-content">
-    <div class="footer-wrap">
-        <div class="footer w1200">
-            <div class="title">
-                <h3>TOP 3 POPULAR BOOKS</h3>
+    <div class="w1200">
+        <div class="title">
+            <h3>Rango: Get What You Want</h3>
+        </div>
+        <div class="search">
+            <div class="layui-input-inline">
+                <input type="text" placeholder="Search" autocomplete="off" class="box layui-input">
+                <button lay-submit class="btn" type="submit"><img width="20px" height="20px" src="{% static 'images/search.png' %}"/></button>
+
             </div>
-            <div class="list-box layui-clear" style="display: flex; justify-content: center;" id="footerList">
-                <div class="item">
-                    <a href="/product.html?p={{item.id}}">
-                        <img src="" style="width: 320px;height: 450px;" alt="" />
-                    </a>
-                    <div class="text">
-                        <div class="right-title-number">1</div>
-                        <div class="commod">
-                            <p>name</p>
-                            <span>3000 Likes</span>
-                        </div>
-                    </div>
+        </div>
+        <div class="trending">
+            <div class="trend-title">Popular Books</div>
+            <div class="trend-list">
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
                 </div>
-                <div class="item">
-                    <a href="/product.html?p={{item.id}}">
-                        <img src="" style="width: 320px;height: 450px;" alt="" />
-                    </a>
-                    <div class="text">
-                        <div class="right-title-number">2</div>
-                        <div class="commod">
-                            <p>name</p>
-                            <span>3000 Likes</span>
-                        </div>
-                    </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
                 </div>
-                <div class="item">
-                    <a href="/product.html?p={{item.id}}">
-                        <img src="" style="width: 320px;height: 450px;" alt="" />
-                    </a>
-                    <div class="text">
-                        <div class="right-title-number">3</div>
-                        <div class="commod">
-                            <p>name</p>
-                            <span>3000 Likes</span>
-                        </div>
-                    </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
+                </div>
+                <div class="trend-book">
+                    <img src="https://images-eu.bookshop.org/product-images/images/9780571273713.jpg?width=170&amp;height=255&amp;v=v2">
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 {% endblock %}
