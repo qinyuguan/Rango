@@ -19,7 +19,7 @@
     width: 30px;
     height: 30px;
     padding-right: 150px;
-    padding-top: 10px;
+    padding-top: 40px;
 }
 
 .title{
@@ -88,4 +88,27 @@
 
 .home-footer{
     font: 20px "GT Super Bold",serif;
+}
+
+.home-items{
+    float: left;
+    display: inline-block;
+    margin-left: 100px;
+}
+
+.home-item{
+    display: inline-block;
+    border-radius: 20px;
+    font: 20px "GT Super Bold",serif;
+    color: whitesmoke;
+    height: 60px;
+    width: 100px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.home-items a:hover{
+    font-weight: bolder;
+    cursor: pointer;
+    background-color: yellow;
 }
