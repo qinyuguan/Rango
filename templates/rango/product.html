@@ -20,19 +20,19 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="info">
                     <div class="pic"><img
-                            src="https://images-eu.bookshop.org/product-images/images/9780857526809.jpg?width=500&height=750&v=v2"/>
+                            src="{{ book.img }}?width=500&height=750&v=v2"/>
                     </div>
                     <div style="float: left;width: 5%;height: 1px"></div>
                     <div class="content">
-                        <div class="title"><h1>Great Circle</h1></div>
+                        <div class="title"><h1>{{ book.title }}</h1></div>
                         <div class="rate">1200+ likes</div>
-                        <div class="author"><h3><span>Maggie Shipstead</span> (Author)</h3></div>
+                        <div class="author"><h3><span>{{ book.author }}</span> (Author)</h3></div>
                         <div class="category">Modern & contemporary fiction</div>
                         <div class="format" style="margin-bottom: 20px">
                             <div class="item">
-                                <div class="type">Hardback</div>
-                                <div class="lang">English</div>
-                                <div class="price">£15.79</div>
+                                <div class="type">{{ book.book_type }}</div>
+                                <div class="lang">{{ book.language }}</div>
+                                <div class="price">{{ book.price }}</div>
                             </div>
                         </div>
                         <div class="operation">
@@ -75,27 +75,27 @@
                             <hr/>
                             <div class="detail-item">
                                 <div class="detail-key">Price</div>
-                                <div class="detail-val">£15.79</div>
+                                <div class="detail-val">{{ book.price }}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-key">Publisher</div>
-                                <div class="detail-val">Transworld Publishers Ltd</div>
+                                <div class="detail-val">{{ book.publisher }}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-key">Publish Date</div>
-                                <div class="detail-val">27 May 2021</div>
+                                <div class="detail-val">{{ book.publish_date }}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-key">Language</div>
-                                <div class="detail-val">English</div>
+                                <div class="detail-val">{{ book.publish_date }}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-key">Type</div>
-                                <div class="detail-val">Hardback</div>
+                                <div class="detail-val">{{ book.book_type }}</div>
                             </div>
                             <div class="detail-item">
                                 <div class="detail-key">EAN/UPC</div>
-                                <div class="detail-val">9780857526809</div>
+                                <div class="detail-val">{{ book.ISBN }}</div>
                             </div>
                         </div>
                     </div>

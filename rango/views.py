@@ -183,8 +183,14 @@ def products(request):
     return render(request, 'rango/products.html', context=context_dict)
 
 
-def product(request):
-    return render(request, 'rango/product.html')
+def product(request,book_detail_slug):
+    context_dict = {}
+    try:
+        book = BookDetail.objects.get(slug=book_detail_slug)
+        context_dict['book'] = book
+        return render(request, 'rango/product.html', context=context_dict)
+    except BookDetail.DoesNotExist:
+        return redirect('rango:index')
 
 
 def bought(request):
