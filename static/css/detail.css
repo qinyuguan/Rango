@@ -1,0 +1,156 @@
+.info{
+    min-width: 1000px;
+    height: auto;
+}
+
+.info .pic {
+    width: 250px;
+    float: left;
+}
+
+.info .content{
+    width: 65%;
+    float: left;
+}
+
+.info .content .title{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.info .content .title h1{
+    font-family: "GT Super Bold", serif;
+    font-size: 34px;
+    color: #2C293B;
+}
+
+.info .content .author{
+    margin-bottom: 20px;
+    color: #808080;
+}
+
+.info .content .author h3{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+}
+
+.info .content .author h3 span{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+    color: #573BA3;
+}
+
+
+.info .content .format .item{
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+    border: 2px solid #573BA3;
+    background-color: #f6f5f7;
+    border-radius: 10px;
+}
+
+.info .content .format .item .type{
+    color: #573BA3;
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+
+
+.info .content .format .item .lang{
+    color: #828087;
+    font-size: 16px;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+.info .content .format .item .price{
+    color: #2C293B;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 10px;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+.info .content .operation{
+    margin-bottom: 20px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+
+.info .content .author span{
+    color: #573BA3;
+}
+
+.info .content .author span{
+    color: #808080;
+}
+
+.info .content .category{
+    margin-bottom: 20px;
+    color: #1FA5A3;
+    font-size: 15px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: bolder;
+}
+
+.info .pic img{
+    width: 100%;
+    height: auto;
+}
+
+.info .content .desc h1{
+    font-size: 28px;
+    color: #2C293B;
+    font-family: "GT Super Bold", serif;
+}
+
+.info .content .desc .desc-content p{
+    font-weight: bold;
+    font-size: 16px;
+    color: #808080;
+    font-family: "IBM Plex Sans", sans-serif;
+    margin-bottom: 20px;
+}
+
+.info .content .product-detail h1{
+    font-size: 28px;
+    color: #2C293B;
+    font-family: "GT Super Bold", serif;
+}
+
+.info .content .product-detail .detail-item{
+    font-size: 28px;
+    color: #2C293B;
+    font-family: "GT Super Bold", serif;
+}
+
+.info .content .product-detail .detail-item .detail-key{
+    width: 100px;
+    text-align: right;
+    font-size: 16px;
+    font-family: "IBM Plex Sans", sans-serif;
+    color: #808080;
+    display: inline-block;
+}
+.info .content .product-detail .detail-item .detail-val{
+    font-size: 16px;
+    color: #2C293B;
+    font-family: "IBM Plex Sans", sans-serif;
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: bolder;
+}
+.info .content .rate{
+    color: #f30606;
+    font-size: 18px;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}

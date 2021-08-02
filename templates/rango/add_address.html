@@ -1,0 +1,60 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Profile
+{% endblock %}
+{% block body_block %}
+<div class="content content-nav-base commodity-content">
+    <div class="commod-cont-wrap" style="display: flex; justify-content: center;">
+        <div class="commod-cont w1200 layui-clear">
+            {% include 'rango/side.html' %}
+            <div class="right-cont-wrap">
+                <div class="right-cont">
+                    <div class="cont-list layui-clear" id="list-cont">
+                        <div class="layui-card">
+                            <div class="layui-card-header">
+                                New Address
+                            </div>
+                            <div class="layui-card-body">
+                               <form class="layui-form" action="">
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">Address</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="address" lay-verify="required" autocomplete="off" placeholder="Detailed address with your postcode" class="layui-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">TEL</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="tel" lay-verify="required" autocomplete="off" placeholder="Telephone number" class="layui-input">
+                                        </div>
+                                    </div>
+
+                                   <div class="layui-form-item">
+                                        <label class="layui-form-label">Name</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="Person name" class="layui-input">
+                                        </div>
+                                    </div>
+
+                                    <div class="layui-form-item">
+                                        <div class="layui-input-block">
+                                            <button class="layui-btn" lay-submit lay-filter="setPwd">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -185,3 +185,12 @@ def product(request):
 
 def bought(request):
     return render(request, 'rango/bought.html')
+
+def profile(request):
+    return render(request, 'rango/profile.html')
+
+def users(request):
+    return render(request, 'rango/users.html')
+
+def add_address(request):
+    return render(request, 'rango/add_address.html')

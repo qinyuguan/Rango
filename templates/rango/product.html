@@ -3,56 +3,83 @@
 {% block title_block %}
     Book name
 {% endblock %}
+{% block head_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+{% endblock %}
 {% block body_block %}
-<div class="content content-nav-base datails-content">
+    <div class="content content-nav-base datails-content">
 
-    <div class="data-cont-wrap w1200">
-        <div class="crumb" style="margin-left: 10%;">
-            <a href="javascript:;">Home Page</a>
-            <span>></span>
-            <a href="javascript:;">All Products</a>
-            <span>></span>
-            <a href="javascript:;">Product detail</a>
-        </div>
-        <div class="product-intro layui-clear" id="intro">
-            <form class="layui-form">
-                <input type="hidden" name="productId" value="{{d.id}}">
-                <div class="preview-wrap">
-                    <a href="javascript:;"><img style="width: 390px;height:390px" src="{{d.pic}}"></a>
-                </div>
-                <div class="itemInfo-wrap">
-                    <div class="itemInfo">
-                        <div class="title">
-                            <h4>Book Name </h4>
-                        </div>
-                        <div class="summary">
-                            <p class="activity"><span>Current Price</span><strong class="price"><i>￡</i>50</strong></p>
-                            <p class="address-box"><span>Shipment</span><strong class="address">DHL</strong>
-                            </p>
-                            <p class="address-box"><span>Rate</span><strong class="address">4.9/5.0</strong>
-                            </p>
-                        </div>
-                        <div class="choose-attrs">
-                            <div class="number layui-clear"><span class="title">Number</span>
-                                <div class="number-cont"><span class="cut btn" onclick="minus();">-</span>
-                                    <input
-                                            onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                                            onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                                            maxlength="4" type="" name="amount" id="number" value="1">
-                                    <span class="add btn" onclick="add();">+</span>
-
-                                </div>
+        <div class="data-cont-wrap w1200">
+            <div class="crumb" style="margin-left: 10%">
+                <a href="javascript:;">Home Page</a>
+                <span>></span>
+                <a href="javascript:;">All Books</a>
+                <span>></span>
+                <a href="javascript:;">Book detail</a>
+            </div>
+            <div class="product-intro layui-clear" id="intro">
+                <div class="info">
+                    <div class="pic"><img
+                            src="https://images-eu.bookshop.org/product-images/images/9780857526809.jpg?width=500&height=750&v=v2"/>
+                    </div>
+                    <div style="float: left;width: 5%;height: 1px"></div>
+                    <div class="content">
+                        <div class="title"><h1>Great Circle</h1></div>
+                        <div class="rate">1200+ likes</div>
+                        <div class="author"><h3><span>Maggie Shipstead</span> (Author)</h3></div>
+                        <div class="category">Modern & contemporary fiction</div>
+                        <div class="format" style="margin-bottom: 20px">
+                            <div class="item">
+                                <div class="type">Hardback</div>
+                                <div class="lang">English</div>
+                                <div class="price">£15.79</div>
                             </div>
                         </div>
-                        <div class="choose-btns">
-                            <button class="layui-btn layui-btn-primary purchase-btn" lay-submit="" lay-filter="buy">Add to cart</button>
+                        <div class="operation">
+                            <div class="layui-btn layui-btn-danger" style="border-radius: 15px;background-color: #DE2454;"><i class="layui-icon layui-icon-cart-simple"></i>ADD TO BASKET</div>
+                            <div class="layui-btn layui-btn-primary" style="border-radius: 15px;"><i class="layui-icon layui-icon-camera"></i>ADD TO WISHLIST</div>
+                        </div>
+                        <div class="desc">
+                            <h1>Description</h1>
+                            <hr/>
+                            <div class="desc-content">
+                                <p>From the days of giant passenger ships sliding past Arctic icebergs, to the daring pilots of WWII, to present-day Hollywood and its malcontents, at the core of this story is the indomitable Marian Graves and her twin brother Jamie who are twice abandoned by their parents. Marian and Jamie grow up roaming Montana forests, more comfortable with landscape than with people.<br>  When a pair of aerobats take their exhilarating show to a nearby airfield, Marian's life is changed forever. Watching them roll, dive, and loop in their mini plane, she can think of nothing else but flying. As she grows into a woman, she sacrifices everything to command the breathtaking sense of freedom, of utter control over her own fate, that she feels when in the air. She becomes one of the most fearless pilots of her time, and in 1949 she sets out to do what no one has done before: fly the Great Circle around the earth, north to south around the poles. Shortly before completing the journey, her plane disappears, lost to history. <br>  In 2015, Hadley Baxter, former child star and poster girl of the blockbuster <i>  Archangel</i>   franchise, has just been fired for cheating on her on-screen boyfriend. Struggling to escape the fury of the fans, she grasps at an offer for the comeback role of a lifetime: to play the famed female pilot Marian Graves in a biopic. From the first pages of the script, she feels an instant connection with Marian, a woman who refused to be bound by gravity or any of the other strictures of her time. After filming is complete, her bond grows stronger as she begins to question whether the Great Marian Graves really did die at all.</p>
+                            </div>
+                        </div>
+                        <div class="product-detail">
+                            <h1>Product Details</h1>
+                            <hr/>
+                            <div class="detail-item">
+                                <div class="detail-key">Price</div>
+                                <div class="detail-val">£15.79</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-key">Publisher</div>
+                                <div class="detail-val">Transworld Publishers Ltd</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-key">Publish Date</div>
+                                <div class="detail-val">27 May 2021</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-key">Language</div>
+                                <div class="detail-val">English</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-key">Type</div>
+                                <div class="detail-val">Hardback</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-key">EAN/UPC</div>
+                                <div class="detail-val">9780857526809</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </form>
+                </div>
+            </div>
         </div>
 
     </div>
-</div>
+    </div>
 {% endblock %}
