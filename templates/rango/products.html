@@ -29,7 +29,22 @@
                     <div class="cont-list layui-clear" id="list-cont">
                         <div class="item">
                           <div class="img" >
-                            <a href="/product.html?p={{item.id}}">
+                            <a href="{% url 'rango:product' %}">
+                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
+                            </a>
+                          </div>
+                          <div class="text">
+                            <p class="title">Book name</p>``
+                            <p class="price">
+                              <span class="pri">Rate : 4.9 / 5</span>
+                              <span class="nub">Author Name</span>
+                            </p>
+                          </div>
+                        </div>
+
+                        <div class="item">
+                          <div class="img" >
+                            <a href="{% url 'rango:product' %}">
                                 <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
                             </a>
                           </div>
@@ -42,25 +57,10 @@
                           </div>
                         </div>
 
-                        <div class="item">
-                          <div class="img" >
-                            <a href="/product.html?p={{item.id}}">
-                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
-                            </a>
-                          </div>
-                          <div class="text">
-                            <p class="title">Book name</p>
-                            <p class="price">
-                              <span class="pri">Rate : 4.9 / 5</span>
-                              <span class="nub">Author Name</span>
-                            </p>
-                          </div>
-                        </div>
-
 
                         <div class="item">
                           <div class="img" >
-                            <a href="/product.html?p={{item.id}}">
+                            <a href="{% url 'rango:product' %}">
                                 <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="Load Failed"/>
                             </a>
                           </div>
@@ -78,7 +78,7 @@
 {#                      {{# layui.each(d.data,function(index,item){}}#}
 {#                        <div class="item">#}
 {#                          <div class="img" >#}
-{#                            <a href="/product.html?p={{item.id}}">#}
+{#                            <a href="{% url 'rango:product' %}">#}
 {#                                <img style="width: 280px;height: 250px" src="{{item.pic}}" alt="加载失败" onerror="this.src='/res/static/img/error.jpg';this.onerror='';"/>#}
 {#                            </a>#}
 {#                          </div>#}
