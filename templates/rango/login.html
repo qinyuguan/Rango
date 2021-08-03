@@ -4,38 +4,38 @@
     Login
 {% endblock %}
 {% block head_block %}
-{#    <script src="https://apis.google.com/js/platform.js" async defer></script>#}
-{#    <meta name="google-signin-client_id" content="757884834792-k9e48llg108003vig4l8cfdihuv6e1lt.apps.googleusercontent.com">#}
+    {#    <script src="https://apis.google.com/js/platform.js" async defer></script>#}
+    {#    <meta name="google-signin-client_id" content="757884834792-k9e48llg108003vig4l8cfdihuv6e1lt.apps.googleusercontent.com">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock %}
 {% block body_block %}
-    <div class="content content-nav-base  login-content">
-    <div class="login-bg">
-        <div class="login-cont w1200">
-            <div class="form-box">
-                <form class="layui-form" action="{% url 'rango:login' %}">
-                    <legend>User Login</legend>
-                    <div class="layui-form-item">
-                        <div class="layui-inline iphone">
-                            <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-username iphone-icon"></i>
-                                <input type="text" name="username" id="username" lay-verify="required" placeholder="Your Username" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline veri-code">
-                            <div class="layui-input-inline">
-                                <i class="layui-icon layui-icon-password iphone-icon"></i>
-                                <input style="padding-left: 40px;" id="password" type="password" name="password" lay-verify="required" placeholder="Your Password" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
+    <div class="w1200">
+        <div class="login">
+            <div class="login-header">
+                <h1>Login</h1>
+            </div>
+            <div class="login-box">
+                <div class="login-item">
+                    <div class="login-label">Username</div>
+                    <div>
+                        <input class="login-input layui-input" type="text" />
                     </div>
-                    <div class="layui-form-item login-btn">
-                        <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="login">Login</button>
-                        </div>
+                </div>
+                <div class="login-item">
+                    <div class="login-label">Password</div>
+                    <div>
+                        <input class="login-input layui-input" type="password" />
                     </div>
-                </form>
+                </div>
+                <div class="login-btn">
+                    <input class="layui-btn" value="LOGIN"/>
+                </div>
+
+                <div class="login-bottom">
+                    or
+                    <a href="{% url 'rango:register' %}">Create a new account</a>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

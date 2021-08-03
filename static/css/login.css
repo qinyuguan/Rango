@@ -1,0 +1,63 @@
+.login{
+    background-color: #f6f5f7;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.login-header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font: 20px "GT Super Bold",serif;
+}
+
+.login-box{
+    background-color: #FFFFFF;
+    border: 1px solid #E1E1E3;
+    width: 480px;
+    border-radius: 5px;
+    margin:0 auto;
+}
+
+.login-item{
+    text-align: left;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-top: 30px;
+}
+
+.login-label{
+    margin-bottom: 4px;
+    font: 20px "GT Super Bold",serif;
+}
+
+.login-input{
+    width: 410px;
+    font: 17px "GT Super Bold",serif;
+}
+
+.login-btn{
+    margin-top: 25px;
+    text-align: left;
+    margin-left: 30px;
+}
+
+.login-btn input{
+    background-color: #DE2454;
+    border-radius: 20px;
+    width: 100px;
+    font: 17px "GT Super Bold",serif;
+    font-weight: bolder;
+}
+
+.login-bottom{
+    text-align: left;
+    margin-left: 30px;
+    margin-top: 45px;
+    margin-bottom: 50px;
+    font: 20px "GT Super Bold",serif;
+}
+
+.login-bottom a{
+    color: #DE2454;
+}
