@@ -1,0 +1,56 @@
+.keyword{
+    font: 34px "GT Super Bold", serif;
+    margin-bottom: 12px;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+
+.sub-keyword{
+    font: 20px "GT Super Bold", serif;
+    margin-bottom: 12px;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+
+.address-box{
+    width: 1100px;
+}
+
+.address-item{
+    padding-bottom: 20px;
+}
+
+.address-key{
+    display: inline-block;
+    font: 15px "GT Super Bold", serif;
+}
+
+.address-val{
+    display: inline-block;
+    font: 15px "GT Super Bold", serif;
+}
+
+.address-edit{
+    border-radius: 20px;
+    font: 10px "GT Super Bold", serif;
+}
+
+/*.address_btn{*/
+/*    margin-right: 20px;*/
+/*    display: inline-block;*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    border: 2px dashed #D5D5D5;*/
+/*    text-align: center;*/
+/*    font: 20px "GT Super Bold", serif;*/
+/*    color: #D5D5D5;*/
+/*}*/
+/*.address{*/
+/*    margin-right: 20px;*/
+/*    display: inline-block;*/
+/*    width: 200px;*/
+/*    height: 200px;*/
+/*    border: 2px solid black;*/
+/*    text-align: center;*/
+/*    font: 10px "GT Super Bold", serif;*/
+/*}*/

@@ -1,78 +1,60 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    Profile
+    Products
+{% endblock %}
+{% block head_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 {% endblock %}
 {% block body_block %}
-<div class="content content-nav-base commodity-content">
-    <div class="commod-cont-wrap" style="display: flex; justify-content: center;">
-        <div class="commod-cont w1200 layui-clear">
-            {% include 'rango/side.html' %}
-            <div class="right-cont-wrap">
-                <div class="right-cont">
-                    <div class="cont-list layui-clear" id="list-cont">
-                        <div class="layui-card">
-                            <div class="layui-card-header">
-                                Your Address
-                                <div style="float: right"><div class="layui-btn layui-btn-primary layui-btn-sm">Add</div></div>
-                            </div>
-                            <div class="layui-card-body">
-                                <blockquote class="layui-elem-quote layui-quote-nm">
-                                    Glasgow University, Glasgow, Scotland, UK (1AA 2CC)
-                                    <br/>
-                                    James Lee (+44012345678)
-                                    <div style="float: right">
-                                        <div class="layui-btn layui-btn-sm">Edit</div>
-                                        <div class="layui-btn layui-btn-danger layui-btn-sm">Remove</div>
-                                    </div>
-                                </blockquote>
-                                <blockquote class="layui-elem-quote layui-quote-nm">
-                                    Glasgow University, Glasgow, Scotland, UK (1AA 2CC)
-                                    <br/>
-                                    Lucas Lee (+44012345678)
-                                    <div style="float: right">
-                                        <div class="layui-btn layui-btn-sm">Edit</div>
-                                        <div class="layui-btn layui-btn-danger layui-btn-sm">Remove</div>
-                                    </div>
 
+    <div class="content content-nav-base datails-content">
 
-                                </blockquote>
-                            </div>
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Your Profile</h3></div>
+                <hr/>
+                <div class="sub-keyword">Address</div>
+                <div class="address-box">
+                    <div class="address-item">
+                            <div class="address-key">Specified address with postcode</div>
+                            <input type="text" class="layui-input address-val" name="address"/>
                         </div>
-                        <div class="layui-card">
-                            <div class="layui-card-header">Change Password</div>
-                            <div class="layui-card-body">
-                                <form class="layui-form" action="">
-
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">Current Pwd</label>
-                                        <div class="layui-input-block">
-                                            <input type="password" name="oldPwd" lay-verify="required" autocomplete="off" placeholder="Current Password" class="layui-input">
-                                        </div>
-                                    </div>
-
-                                    <div class="layui-form-item">
-                                        <label class="layui-form-label">New Pwd</label>
-                                        <div class="layui-input-block">
-                                            <input type="password" name="password" lay-verify="required" autocomplete="off" placeholder="New Password" class="layui-input">
-                                        </div>
-                                    </div>
-
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block">
-                                            <button class="layui-btn" lay-submit lay-filter="setPwd">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
+                    <div class="address-item">
+                            <div class="address-key">Receiver full name</div>
+                            <input type="text" class="layui-input address-val" name="name"/>
                         </div>
+                    <div class="address-item">
+                            <div class="address-key">PostCode</div>
+                            <input type="text" class="layui-input address-val" name="postcode"/>
+                        </div>
+                    <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif" class="layui-btn layui-btn-danger"><i
+                            class="layui-icon layui-icon-edit"></i>
+                        SAVE
+                    </div>
+                </div>
+                <hr/>
+                <div class="sub-keyword">Password</div>
+                <div class="address-box">
+                    <div class="address-item">
+                            <div class="address-key">Current Password</div>
+                            <input type="password" class="layui-input address-val" name="password"/>
+                        </div>
+                    <div class="address-item">
+                            <div class="address-key">New Password</div>
+                            <input type="password" class="layui-input address-val" name="password_new"/>
+                        </div>
+                    <div class="address-item">
+                            <div class="address-key">Password Confirmation</div>
+                            <input type="password" class="layui-input address-val" name="password_cf"/>
+                        </div>
+                    <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif" class="layui-btn layui-btn-danger"><i
+                            class="layui-icon layui-icon-edit"></i>
+                        SAVE
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
-</div>
 {% endblock %}
