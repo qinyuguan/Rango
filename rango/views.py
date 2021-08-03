@@ -13,12 +13,9 @@ from rango.forms import UserForm, UserProfileForm
 
 
 def index(request):
-    category_list = Category.objects.order_by('-likes')[:5]
-    page_list = Page.objects.order_by('-views')[:5]
-    context_dict = {}
-    context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
-    context_dict['categories'] = category_list
-    context_dict['pages'] = page_list
+    #TODO:- order by count of like
+    book_list = BookDetail.objects.order_by('title')[:20]
+    context_dict = {'book_list': book_list}
     visitor_cookie_handler(request)
     response = render(request, 'rango/index.html', context=context_dict)
     return response
