@@ -57,6 +57,7 @@ class BookDetail(models.Model):
     book_type = models.CharField(max_length=MAX_LENGTH)
     ISBN = models.CharField(max_length=MAX_LENGTH)
     slug = models.SlugField(blank=True, unique=True)
+    desc = models.CharField(max_length=8192, default="")
 
     # TODO- category, reviews, desc
     # category = ""
