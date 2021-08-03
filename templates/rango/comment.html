@@ -1,0 +1,49 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Products
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bought.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Write Review</h3></div>
+                <div class="order-list">
+                    <div class="order-item">
+
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
+                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="comment-box">
+                        <div class="comment-item">
+                            <div class="comment-key">Comment</div>
+                            <textarea type="text" class="layui-textarea comment-val" name="comment"></textarea>
+                        </div>
+                        <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
+                             class="layui-btn layui-btn-danger"><i
+                                class="layui-icon layui-icon-edit"></i>
+                            SUBMIT
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

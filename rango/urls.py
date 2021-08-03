@@ -21,5 +21,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('add_address/', views.add_address, name='add_address'),
     path('users/', views.users, name='users'),
-    path('cart/', views.cart, name='cart')
+    path('cart/', views.cart, name='cart'),
+    path('comment/', views.comment, name='comment')
 ]

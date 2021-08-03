@@ -207,3 +207,6 @@ def add_address(request):
 
 def cart(request):
     return render(request, 'rango/cart.html')
+
+def comment(request):
+    return render(request, 'rango/comment.html')
