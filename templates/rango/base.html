@@ -20,7 +20,6 @@
 </head>
 <body>
 
-
 <div class="home-nav">
     <div class="home-logo">
         <img src="{% static 'images/logo.png' %}"/>
@@ -34,12 +33,17 @@
             <input type="text" placeholder="Search" autocomplete="off" class="box layui-input">
             <button lay-submit class="btn" type="submit"><img width="20px" height="20px"
                                                                   src="{% static 'images/search.png' %}"/></button>
-
         </div>
     </div>
-    <div class="home-operation">
-        <a href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/> </a>
+    <div class="home-operation" style="z-index: 999">
+        <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
+        <div class="popup-box">
+            <div class="popup-item"><a>Login</a></div>
+            <div class="popup-item"><a>Sign Up</a></div>
+            <div class="popup-item"><a>Logout</a></div>
+        </div>
     </div>
+
 </div>
 {% block body_block %}
 

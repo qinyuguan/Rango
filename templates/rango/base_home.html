@@ -29,8 +29,13 @@
         <a class="home-item" href="{% url 'rango:index' %}">Home</a>
         <a class="home-item" href="{% url 'rango:products' %}">Books</a>
     </div>
-    <div class="home-operation">
-        <a href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/> </a>
+    <div class="home-operation" style="z-index: 999">
+        <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
+        <div class="popup-box">
+            <div class="popup-item"><a>Login</a></div>
+            <div class="popup-item"><a>Register</a></div>
+            <div class="popup-item"><a>Logout</a></div>
+        </div>
     </div>
 </div>
 {% block body_block %}

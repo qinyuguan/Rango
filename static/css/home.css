@@ -13,9 +13,10 @@
 .home-operation{
     float: right;
     display: inline-block;
+    position: relative;
 }
 
-.home-operation a img{
+.home-operation div img{
     width: 30px;
     height: 30px;
     padding-right: 150px;
@@ -140,4 +141,38 @@
     font-weight: bolder;
     cursor: pointer;
     background-color: yellow;
+}
+
+
+.popup-box{
+    display: none;
+    position: absolute;
+    margin-top: 0px;
+    background-color: #f9f9f9;
+    min-width: 64px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding-bottom: 8px;
+}
+
+.popup-item a{
+    text-align: left;
+    font: 12px "IBM Plex Sans", sans-serif;
+    color: #DE2454;
+    padding: 8px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.popup-item a:hover{
+    /*font-weight: bolder;*/
+    text-decoration: underline;
+}
+
+.home-operation:hover{
+    cursor: pointer;
+}
+
+.home-operation:hover .popup-box{
+    display: block;
 }
