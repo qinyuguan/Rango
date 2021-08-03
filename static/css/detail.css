@@ -13,12 +13,12 @@
     float: left;
 }
 
-.info .content .title{
+.info .content .b_title{
     position: relative;
     margin-bottom: 20px;
 }
 
-.info .content .title h1{
+.info .content .b_title h1{
     font-family: "GT Super Bold", serif;
     font-size: 34px;
     color: #2C293B;
@@ -30,12 +30,12 @@
 }
 
 .info .content .author h3{
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
     font-size: 15px;
 }
 
 .info .content .author h3 span{
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
     font-size: 15px;
     color: #573BA3;
 }
@@ -55,7 +55,7 @@
     font-size: 18px;
     margin-bottom: 15px;
     margin-left: 10px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
 }
 
 
@@ -65,7 +65,7 @@
     font-size: 16px;
     margin-bottom: 15px;
     margin-left: 10px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
 }
 
 .info .content .format .item .price{
@@ -73,7 +73,7 @@
     font-size: 16px;
     font-weight: bolder;
     margin-left: 10px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
 }
 
 .info .content .operation{
@@ -96,7 +96,7 @@
     margin-bottom: 20px;
     color: #1FA5A3;
     font-size: 15px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
     font-weight: bolder;
 }
 
@@ -150,7 +150,11 @@
 .info .content .rate{
     color: #f30606;
     font-size: 18px;
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: "GT Super Bold", serif;
     font-weight: bolder;
     margin-bottom: 20px;
+}
+
+.b-crumb{
+    font-family: "IBM Plex Sans", sans-serif;
 }

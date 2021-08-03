@@ -39,6 +39,34 @@
     background-color: #573BA3;
 }
 
+.home-search{
+    text-align: center;
+    float: left;
+    padding-top: 30px;
+    padding-left: 20px;
+}
+
+.home-search .box{
+    border-radius: 20px;
+    display: inline-block;
+    width: 300px;
+    height: 45px;
+    padding-left: 20px;
+    padding-right: 50px;
+}
+
+.home-search .btn{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 0px;
+    background-color: #DE2454;
+    display: inline-block;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+}
+
 .search .box{
     border-radius: 20px;
     display: inline-block;
@@ -94,6 +122,7 @@
     float: left;
     display: inline-block;
     margin-left: 100px;
+    width: 400px;
 }
 
 .home-item{

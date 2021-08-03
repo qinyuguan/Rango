@@ -30,7 +30,7 @@
         <a class="home-item" href="{% url 'rango:products' %}">Books</a>
     </div>
     <div class="home-operation">
-        <a href="#"><img src="{% static 'images/user.png' %}"/> </a>
+        <a href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/> </a>
     </div>
 </div>
 {% block body_block %}

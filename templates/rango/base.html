@@ -14,109 +14,48 @@
 
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'layui/css/layui.css' %}">
     <script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
 </head>
 <body>
 
 
-<div class="site-nav-bg">
-    <div class="site-nav w1200">
-        <p class="sn-back-home">
-            <i class="layui-icon layui-icon-home"></i>
-            <a href="#">Rango</a>
-        </p>
-        <div class="sn-quick-menu">
-            <div class="login" id="login"><a href="{% url 'rango:login' %}">Login</a></div>
-            <div class="login" id="register"><a href="{% url 'rango:register' %}">Register</a></div>
-            <div class="login" id="center"><a href="{% url 'rango:bought' %}">Me</a></div>
+<div class="home-nav">
+    <div class="home-logo">
+        <img src="{% static 'images/logo.png' %}"/>
+    </div>
+    <div class="home-items">
+        <a class="home-item" href="{% url 'rango:index' %}">Home</a>
+        <a class="home-item" href="{% url 'rango:products' %}">Books</a>
+    </div>
+    <div class="home-search">
+        <div class="layui-input-inline">
+            <input type="text" placeholder="Search" autocomplete="off" class="box layui-input">
+            <button lay-submit class="btn" type="submit"><img width="20px" height="20px"
+                                                                  src="{% static 'images/search.png' %}"/></button>
+
         </div>
     </div>
-</div>
-
-<div class="header">
-    <div class="headerLayout w1200">
-        <div class="headerCon">
-            <h1 class="mallLogo">
-                <a href="#" title="Rango">
-                    <img style="padding-left: 60%" src="{% static 'images/logo.png' %}">
-                </a>
-            </h1>
-            <div class="mallSearch">
-                <form action="/index.html" method="get" class="layui-form" novalidate>
-                    <input type="text" name="keyword" autocomplete="off" class="layui-input" placeholder="Search here">
-                    <button class="layui-btn" lay-submit lay-filter="search">
-                        <i class="layui-icon layui-icon-search"></i>
-                    </button>
-                    <input type="hidden" name="" value="">
-
-                </form>
-            </div>
-        </div>
+    <div class="home-operation">
+        <a href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/> </a>
     </div>
 </div>
-
-<div class="content content-nav-base  login-content">
-    <div class="main-nav">
-        <div class="inner-cont0">
-            <div class="inner-cont1 w1200">
-                <div class="inner-cont2">
-                    <a href="{% url 'rango:index' %}" class="active">Home</a>
-                    <a href="{% url 'rango:products' %}" class="active">Books</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 {% block body_block %}
 
 {% endblock %}
 <div id="footer">
 
-    <div class="footer">
-        <div class="ng-promise-box" style="display: flex; justify-content: center;" >
-            <div class="ng-promise w1200">
-                <p class="text">
-                    <a class="icon1" href="javascript:;">High quality</a>
-                    <a class="icon1" href="javascript:;">More economical</a>
-                    <a class="icon3" style="margin-right: 0" href="javascript:;">More convenient</a>
-                </p>
-            </div>
-        </div>
-        <div class="mod_help w1200">
-            <p>
-                <a href="javascript:;">About us</a>
+    <div class="footer home-footer" style="background-color: #573BA3;">
+        <div class="mod_help w1200" style="padding-top: 10px;">
+            <p style="color: white">
+                <a href="javascript:;" style="color: white">About us</a>
                 <span>|</span>
-                <a href="javascript:;">Map site</a>
+                <a href="javascript:;" style="color: white">Map site</a>
             </p>
-            <p class="coty">2021 Internet Technology - Team abc</p>
+            <p class="coty" style="color: white">2021 Internet Technology - Team abc</p>
         </div>
     </div>
 </div>
-{##}
-{#<div>#}
-{#    {% block sidebar_block %}#}
-{#        {% get_category_list category%}#}
-{#    {% endblock %}#}
-{#</div>#}
-{#<hr/>#}
-{#<div>#}
-{#    <ul>#}
-{#        {% if user.is_authenticated %}#}
-{#            <li><a href="{% url 'rango:restricted' %}">Restricted Page</a></li>#}
-{#            <li><a href="{% url 'rango:logout' %}">Logout</a></li>#}
-{#        {% else %}#}
-{#            <li><a href="{% url 'rango:register' %}">Sign Up</a></li>#}
-{#            <li><a href="{% url 'rango:login' %}">Login</a></li>#}
-{#        {% endif %}#}
-{#        {% if user.is_authenticated %}#}
-{#        <li><a href="{% url 'rango:add_category' %}">Add a New Category</a></li>#}
-{#        {% endif %}#}
-{#        <li><a href="{% url 'rango:about' %}">About</a></li>#}
-{#        <li><a href="{% url 'rango:index' %}">Index</a></li>#}
-{##}
-{##}
-{#    </ul>#}
 </body>
 </html>
