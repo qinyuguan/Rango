@@ -204,3 +204,6 @@ def users(request):
 
 def add_address(request):
     return render(request, 'rango/add_address.html')
+
+def cart(request):
+    return render(request, 'rango/cart.html')

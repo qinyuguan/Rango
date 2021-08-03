@@ -1,0 +1,74 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Products
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Shopping Basket</h3></div>
+                <hr/>
+                <div class="cart-list">
+                    <div class="cart-item">
+                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
+                        <div class="cart-title">
+                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
+                        </div>
+                        <div class="cart-qty">
+                                Qty: 1
+                        </div>
+                        <div class="cart-price">
+                            £13.99
+                        </div>
+                        <div class="cart-op">
+                            <a>Delete</a>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
+                        <div class="cart-title">
+                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
+                        </div>
+                        <div class="cart-qty">
+                                Qty: 1
+                        </div>
+                        <div class="cart-price">
+                            £13.99
+                        </div>
+                        <div class="cart-op">
+                            <a>Delete</a>
+                        </div>
+                    </div>
+                    <div class="cart-item">
+                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
+                        <div class="cart-title">
+                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
+                        </div>
+                        <div class="cart-qty">
+                                Qty: 1
+                        </div>
+                        <div class="cart-price">
+                            £13.99
+                        </div>
+                        <div class="cart-op">
+                            <a>Delete</a>
+                        </div>
+                    </div>
+
+                    <div class="cart-total">
+                        Total: £13.99
+                    </div>
+                    <div class="cart-total">
+                        <a class="layui-btn"><i class="layui-icon layui-icon-ok"></i>Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
