@@ -1,72 +1,204 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    Orders
-{% endblock %}
-{% block head_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/user_center.css' %}">
+    Products
 {% endblock %}
 {% block body_block %}
-    <div class="content content-nav-base commodity-content">
-    <div class="commod-cont-wrap" style="display: flex; justify-content: center;">
-        <div class="commod-cont w1200 layui-clear">
-            {% include 'rango/side.html' %}
-            <div class="right-cont-wrap">
-                <div class="right-cont">
-                    <div class="cont-list layui-clear">
-                        <div id="user_center">
-                            <div class="title">
-                                <table>
-                                    <tr>
-                                        <td width="94px"></td>
-                                        <td width="376px">Books</td>
-                                        <td width="141px">Price</td>
-                                        <td width="47px">Number</td>
-                                        <td width="141px">Total</td>
-                                        <td width="141px">Status</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="tables">
-                                <div class="table status_pay">
-                                    <div class="head">
-                                        <span class="time"></span> <span class="text">Order No：
-						</span> <span class="orderId"> {{ item.id }} </span> <span class="status">Not Completed</span>
-                                    </div>
-                                    <table>
-                                        <tr>
-                                            <td class="image" width="94px"><img
-                                                                   src="{{ item.productPic }}" alt=""></td>
-                                            <td class="info" width="376px">
-                                                <div>Book：Book name</div>
-                                                <br>
-                                                <div>Author: Author name</div>
-                                                <div>Address：XXXXX</div>
-                                            </td>
-                                            <td class="price" width="141px" rowspan="1">50.00</td>
-                                            <td class="amount" width="57px" rowspan="1">1</td>
-                                            <td class="pay" width="130px" rowspan="1">
-                                                <div class="money">￡ 50.00</div>
-                                                <div>（DHL）</div>
-                                            </td>
-                                            <td class="operate" width="141px" rowspan="1">
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bought.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
 
-                                                <div>
-                                                    <a class="btn" href="#">Finished</a>
-                                                </div>
-
-                                            </td>
-                                        </tr>
-                                    </table>
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Your Orders</h3></div>
+                <div class="order-list">
+                    <div class="order-item">
+                        <div class="order-header">
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER PLACED
                                 </div>
-
+                                <div class="order-header-item-val">
+                                    27 July 2021
+                                </div>
                             </div>
-
-
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    TOTAL
+                                </div>
+                                <div class="order-header-item-val">
+                                    £29.99
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    DISPATCH TO
+                                </div>
+                                <div class="order-header-item-val">
+                                    ALEX WANG
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER NUMBER
+                                </div>
+                                <div class="order-header-item-val">
+                                    000000000000000
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    STATUS
+                                </div>
+                                <div class="order-header-item-val bolder">
+                                    SHIPING
+                                </div>
+                            </div>
                         </div>
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a class="layui-btn layui-btn-primary">Write a product review</a>
+                                <a class="layui-btn layui-btn-primary">Return items</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="order-item">
+                        <div class="order-header">
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER PLACED
+                                </div>
+                                <div class="order-header-item-val">
+                                    27 July 2021
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    TOTAL
+                                </div>
+                                <div class="order-header-item-val">
+                                    £29.99
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    DISPATCH TO
+                                </div>
+                                <div class="order-header-item-val">
+                                    ALEX WANG
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER NUMBER
+                                </div>
+                                <div class="order-header-item-val">
+                                    000000000000000
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    STATUS
+                                </div>
+                                <div class="order-header-item-val bolder">
+                                    SHIPING
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a class="layui-btn layui-btn-primary">Write a product review</a>
+                                <a class="layui-btn layui-btn-primary">Return items</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="order-item">
+                        <div class="order-header">
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER PLACED
+                                </div>
+                                <div class="order-header-item-val">
+                                    27 July 2021
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    TOTAL
+                                </div>
+                                <div class="order-header-item-val">
+                                    £29.99
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    DISPATCH TO
+                                </div>
+                                <div class="order-header-item-val">
+                                    ALEX WANG
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    ORDER NUMBER
+                                </div>
+                                <div class="order-header-item-val">
+                                    000000000000000
+                                </div>
+                            </div>
+                            <div class="order-header-item">
+                                <div class="order-header-item-key">
+                                    STATUS
+                                </div>
+                                <div class="order-header-item-val bolder">
+                                    SHIPING
+                                </div>
+                            </div>
+                        </div>
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a class="layui-btn layui-btn-primary">Write a product review</a>
+                                <a class="layui-btn layui-btn-primary">Return items</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

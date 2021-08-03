@@ -1,0 +1,95 @@
+.keyword{
+    font: 34px "GT Super Bold", serif;
+    margin-bottom: 12px;
+    font-weight: bolder;
+    margin-top: 20px;
+}
+
+.bolder{
+    font-weight: bolder;
+}
+
+.order-list{
+    width: 1100px;
+    min-width: 1100px;
+}
+
+.order-item{
+    border-radius: 5px;
+    border: 1px solid #D5D5D5;
+    margin-bottom: 30px;
+}
+
+.order-header{
+    border-bottom: 1px solid #D5D5D5;
+    height: 80px;
+}
+
+.order-header-item{
+    height: 100%;
+    width: 180px;
+    display: inline-block;
+}
+
+.order-header-item-key{
+    padding-left: 20px;
+    padding-top: 20px;
+    width: 100%;
+    font: 15px "GT Super Bold", serif;
+    color: #626265;
+}
+
+.order-header-item-val{
+    padding-left: 20px;
+    padding-top: 8px;
+    width: 100%;
+    font: 15px "GT Super Bold", serif;
+    color: #626265;
+}
+
+.order-detail{
+    padding: 20px 20px 20px 20px;
+}
+
+.order-detail-img{
+    width: 100px;
+    display: inline-block;
+}
+
+.order-detail-img a:hover{
+    cursor: pointer;
+}
+
+.order-detail-img a img{
+    width: 100px;
+}
+
+.order-detail-title{
+    padding-left: 50px;
+    width: 400px;
+    display: inline-block;
+    font: 17px "GT Super Bold", serif;
+    font-weight: bolder;
+    color: black;
+}
+
+.order-detail-title a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+}
+
+.order-operation{
+    display: inline-block;
+    width: 300px;
+    float: right;
+    text-align: right;
+}
+
+.order-operation a{
+    width: 200px;
+    margin-bottom: 5px;
+    font: 17px "GT Super Bold", serif;
+    font-weight: bolder;
+    padding-top: 5px;
+}
