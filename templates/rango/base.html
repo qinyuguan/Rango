@@ -38,8 +38,9 @@
     <div class="home-operation" style="z-index: 999">
         <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
         <div class="popup-box">
-            <div class="popup-item"><a>Login</a></div>
-            <div class="popup-item"><a>Sign Up</a></div>
+            <div class="popup-item"><a href="{% url 'rango:login' %}">Login</a></div>
+            <div class="popup-item"><a href="{% url 'rango:register' %}">Sign Up</a></div>
+            <div class="popup-item"><a href="{% url 'rango:bought' %}">My Orders</a></div>
             <div class="popup-item"><a>Logout</a></div>
         </div>
     </div>
