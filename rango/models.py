@@ -58,6 +58,7 @@ class BookDetail(models.Model):
     ISBN = models.CharField(max_length=MAX_LENGTH)
     slug = models.SlugField(blank=True, unique=True)
     desc = models.CharField(max_length=8192, default="")
+    category = models.CharField(max_length=8192, default="")
 
     # TODO- category, reviews, desc
     # category = ""
@@ -68,3 +69,6 @@ class BookDetail(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(BookDetail, self).save(*args, **kwargs)
+
+    def get_categories(self):
+        return self.category.split(";")
