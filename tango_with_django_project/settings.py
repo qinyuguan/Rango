@@ -30,7 +30,8 @@ SECRET_KEY = '*-%qmz(@=v+3#ne(jb86f2a69d)o&9)0+nn1))a@gug@rv5_10'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'rango.iamwz.online'
+    'rango.iamwz.online',
+    '127.0.0.1'
 ]
 
 # Application definition
