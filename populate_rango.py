@@ -99,7 +99,7 @@ if __name__ == '__main__':
     all_product_indies = []
     all_product_info = []
 
-    for i in range(1, 50):
+    for i in range(1, 101):
         list_url = main_page_url + str(i)
         print(list_url)
         response = requests.get(list_url, headers={
