@@ -21,8 +21,13 @@ urlpatterns = [
     path('comment/', views.comment, name='comment'),
     path('category/<slug:category_name>/', views.category, name='category'),
     path('categories/', views.categories, name='categories'),
+    path('cart/add/', views.cart_add,name='cart_add'),
+    path('cart/del/', views.cart_del,name='cart_del'),
+    path('cart/confirm/', views.cart_confirm,name='cart_confirm'),
 
 
     path('admin/books/', views.admin_books, name='admin_books'),
-    path('admin/books/add',views.admin_add_books, name='admin_add_books')
+    path('admin/books/add/',views.admin_add_books, name='admin_add_books'),
+    path('admin/categories/', views.admin_categories, name='admin_categories'),
+    path('admin/categories/add/',views.admin_add_categories, name='admin_add_categories')
 ]

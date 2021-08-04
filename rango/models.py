@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from uuid import uuid1
 
 # Create your models here.
 from django.template.defaultfilters import slugify
@@ -72,3 +73,26 @@ class BookDetail(models.Model):
 
     def get_categories(self):
         return self.category.split(";")
+
+
+class Cart(models.Model):
+    user = models.ManyToManyField(User)
+    book = models.ManyToManyField(BookDetail)
+    num = models.IntegerField(default=1)
+
+    def increment(self):
+        self.num = self.num + 1
+
+
+class Order(models.Model):
+    user = models.ManyToManyField(User)
+    book = models.ManyToManyField(BookDetail)
+    price = models.CharField(max_length=255)
+    quantity = models.IntegerField(default=255)
+    total_price = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=1000)
+    phone = models.CharField(max_length=255)
+    status = models.IntegerField(default=0)
+    date = models.DateField()
+    order_no = models.UUIDField(primary_key=False, default=uuid1, editable=False)

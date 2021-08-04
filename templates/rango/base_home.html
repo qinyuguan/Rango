@@ -13,10 +13,10 @@
     {% block head_block %}
 
     {% endblock %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'layui/css/layui.css' %}">
-    <script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
         <a class="home-item" href="{% url 'rango:products' %}">Books</a>
         <a class="home-item" href="{% url 'rango:categories' %}">Categories</a>
     </div>
-    <div style="width: 320px;height:100px;display: inline-block;float: left;"></div>
+    <div style="width: 300px;height: 1px;display: inline-block;"></div>
     <div class="home-operation" style="z-index: 999">
         <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
         <div class="popup-box">

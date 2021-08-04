@@ -1,17 +1,17 @@
 .home-nav{
+
     background-color: #573BA3;
     height: 100px;
+    border: 0px;
 }
 
 .home-logo{
-    float: left;
+    padding-left: 10%;
     display: inline-block;
-    padding-left: 100px;
     padding-top: 10px;
 }
 
 .home-operation{
-    float: left;
     display: inline-block;
     position: relative;
     margin-left: 20px;
@@ -20,7 +20,6 @@
 .home-operation div img{
     width: 30px;
     height: 30px;
-    padding-top: 40px;
 }
 
 .title{
@@ -31,6 +30,7 @@
     font-weight: bolder;
     background-color: #573BA3;
     color: white;
+    border: 0px;
 }
 
 .search{
@@ -41,10 +41,9 @@
 }
 
 .home-search{
+    display: inline-block;
     text-align: center;
-    float: left;
     padding-top: 30px;
-    padding-left: 20px;
 }
 
 .home-search .box{
@@ -120,16 +119,14 @@
 }
 
 .home-items{
-    float: left;
     display: inline-block;
-    margin-left: 100px;
     width: 400px;
 }
 
 .home-item{
     display: inline-block;
     border-radius: 20px;
-    font: 20px "GT Super Bold",serif;
+    font: 16px "GT Super Bold",serif;
     color: whitesmoke;
     height: 60px;
     width: 100px;

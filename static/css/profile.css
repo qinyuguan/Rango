@@ -21,12 +21,11 @@
 }
 
 .address-key{
-    display: inline-block;
     font: 15px "GT Super Bold", serif;
 }
 
 .address-val{
-    display: inline-block;
+    /*display: inline-block;*/
     font: 15px "GT Super Bold", serif;
 }
 

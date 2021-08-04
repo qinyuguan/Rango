@@ -14,58 +14,40 @@
                 <div class="keyword"><h3>Shopping Basket</h3></div>
                 <hr/>
                 <div class="cart-list">
-                    <div class="cart-item">
-                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
-                        <div class="cart-title">
-                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
-                        </div>
-                        <div class="cart-qty">
-                                Qty: 1
-                        </div>
-                        <div class="cart-price">
-                            £13.99
-                        </div>
-                        <div class="cart-op">
-                            <a>Delete</a>
-                        </div>
-                    </div>
-                    <div class="cart-item">
-                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
-                        <div class="cart-title">
-                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
-                        </div>
-                        <div class="cart-qty">
-                                Qty: 1
-                        </div>
-                        <div class="cart-price">
-                            £13.99
-                        </div>
-                        <div class="cart-op">
-                            <a>Delete</a>
-                        </div>
-                    </div>
-                    <div class="cart-item">
-                        <div class="cart-img"><img src="https://images-eu.bookshop.org/product-images/images/9780241979464.jpg?width=170&height=255&v=v2" /> </div>
-                        <div class="cart-title">
-                                10 Minutes 38 Seconds in this Strange World: SHORTLISTED FOR THE BOOKER PRIZE 2019
-                        </div>
-                        <div class="cart-qty">
-                                Qty: 1
-                        </div>
-                        <div class="cart-price">
-                            £13.99
-                        </div>
-                        <div class="cart-op">
-                            <a>Delete</a>
-                        </div>
-                    </div>
+                    {% if cart_list %}
+                        {% for book in cart_list %}
+                            <div class="cart-item">
+                                <div class="cart-img"><img
+                                        src="{{ book.img }}"/>
+                                </div>
+                                <div class="cart-title">
+                                    {{ book.title }}
+                                </div>
+                                <div class="cart-qty">
+                                    Qty: {{ book.num }}
+                                </div>
+                                <div class="cart-price">
+                                    {{ book.price }}
+                                </div>
+                                <div class="cart-op">
+                                    <a href="{% url 'rango:cart_del' %}?id={{ book.id }}">Delete</a>
+                                </div>
+                            </div>
+                        {% endfor %}
 
-                    <div class="cart-total">
-                        Total: £13.99
-                    </div>
-                    <div class="cart-total">
-                        <a class="layui-btn"><i class="layui-icon layui-icon-ok"></i>Confirm</a>
-                    </div>
+                        <div class="cart-total">
+                            Total: {{ total }}
+                        </div>
+                        <div class="cart-total">
+                            <a class="layui-btn"><i class="layui-icon layui-icon-ok"></i>Confirm</a>
+                        </div>
+                    {% else %}
+
+                        <div class="cart-nothing">You have nothing in your basket</div>
+
+                    {% endif %}
+
+
                 </div>
             </div>
         </div>
