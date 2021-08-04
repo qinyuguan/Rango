@@ -136,17 +136,6 @@ def user_login(request):
         return render(request, 'rango/login.html')
 
 
-def some_view(request):
-    if not request.user.is_authenticated():
-        return HttpResponse("You are logged in.")
-    else:
-        return HttpResponse("You are not logged in.")
-
-
-@login_required
-def restricted(request):
-    return render(request, 'rango/restricted.html')
-
 
 @login_required()
 def user_logout(request):
@@ -210,3 +199,11 @@ def cart(request):
 
 def comment(request):
     return render(request, 'rango/comment.html')
+
+def category(request, category_name):
+    context_dict = {}
+    context_dict['category_name'] = category_name
+    return render(request, 'rango/category.html', context=context_dict)
+
+def categories(request):
+    return render(request, 'rango/categories.html')

@@ -55,3 +55,80 @@
     padding-left: 10px;
     background-color: #f6f5f7;
 }
+
+.keyword-selector{
+    display: flex;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.keyword-selector li{
+    padding: 4px;
+    background-color: #e6e3e8;
+}
+
+.keyword-selector li:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.keyword-selector li:last-child {
+    border-radius: 0px 10px 10px 0;
+}
+
+.keyword-selector a{
+    height: 39px;
+    width: 140px;
+    font: 15px "GT Super Bold",serif;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    line-height: 39px;
+    cursor: pointer;
+    color: black;
+    font-weight: lighter;
+}
+
+.keyword-selector a:hover{
+    color: black;
+}
+
+
+.keyword-selector .active{
+    background-color: #FFFFFF;
+}
+
+
+.cate-list{
+    max-width: 1100px;
+    border-radius: 10px;
+    display: grid;
+    grid-column-gap: 10px;
+    column-gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 200px));
+    grid-row-gap: 15px;
+    row-gap: 1px;
+}
+
+.cate{
+    width: 200px;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    font: 20px "GT Super Bold",serif;
+    font-weight: bolder;
+}
+
+.cate a{
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    display: block;
+}
+
+.cate:hover{
+    background-color: #e6e3e8;
+    cursor: pointer;
+}

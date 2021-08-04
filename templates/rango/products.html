@@ -12,6 +12,17 @@
         <div class="data-cont-wrap w1200">
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Popular</h3></div>
+                <div class="choose-bar">
+                    <ul class="keyword-selector">
+                    <li><a href="{% url 'rango:products' %}" class="active">Books</a></li>
+                        {% if keyword %}
+                            <li><a href="{% url 'rango:category' keyword %}">Categories</a></li>
+                        {% else %}
+                            <li><a href="{% url 'rango:categories' %}">Categories</a></li>
+                        {% endif %}
+
+                </ul>
+                </div>
                 <div class="booklist">
                         {% if book_list %}
                             {% for book in book_list %}

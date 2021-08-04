@@ -1,19 +1,57 @@
-<ul>
-    {% if categories %}
-        {% for c in categories %}
-            {% if c == current_category %}
-            <li>
-                <strong>
-                    <a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a>
-                </strong>
-            </li>
-            {% else %}
-            <li>
-                <a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a>
-            </li>
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        <li><strong>There are no categories present.</strong></li>
-    {% endif %}
-</ul>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Categories
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/list.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Categories</h3></div>
+                <div class="choose-bar">
+                    <ul class="keyword-selector">
+                    <li><a href="{% url 'rango:products' %}">Books</a></li>
+                    <li><a href="{% url 'rango:categories' %}" class="active">Categories</a></li>
+                </ul>
+                </div>
+                <div class="cate-list">
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                    <div class="cate">
+                        <a href="{% url 'rango:category' 'fiction' %}">Fiction</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
