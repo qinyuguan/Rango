@@ -1,4 +1,5 @@
 import os
+import sys
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.settings')
 
@@ -133,14 +134,16 @@ if __name__ == '__main__':
             # descriptions = html.xpath("//div[@itemprop=\"description\"]/p/*")
             # desc = list(filter(lambda x: x != None, map(lambda x: x.text, descriptions)))
 
-            descriptions = html.xpath("//div[@itemprop=\"description\"]/p")
+            descriptions = html.xpath("//div[@itemprop=\"description\"]")
             if len(descriptions) != 0:
-                desc = etree.tostring(descriptions[0], pretty_print=True, method='html').decode('utf-8')
+                descriptions[0].tail = None
+                desc = etree.tostring(descriptions[0], pretty_print=True, method='html', with_tail=False).decode('utf-8').split('<div class="mb-8">')[0]
             else:
                 desc = ""
             book = BookDetail.objects.get_or_create(title=title, author=author, img=img, publisher=publisher,
                                                     publish_date=publish_date, price=price, language=language,
-                                                    book_type=book_type, ISBN=ISBN, desc=desc)[0]
+                                                    book_type=book_type, ISBN=ISBN, desc=desc,category=categories)[0]
             book.save()
-        except:
+        except Exception as exc:
             print("error occured when fetch:  ", base_url + index.url)
+            print(exc)
