@@ -11,7 +11,7 @@ from rango.models import BookDetail
 from rango.models import Cart
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
-
+from django.http import JsonResponse
 
 def index(request):
     #TODO:- order by count of like
@@ -231,6 +231,7 @@ def admin_categories(request):
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
 
+
 def cart_add(request):
     if request.method == 'POST':
         slug = request.POST.get('slug')
@@ -239,7 +240,7 @@ def cart_add(request):
         try:
             book = BookDetail.objects.get(slug=slug)
         except BookDetail.DoesNotExist:
-            return HttpResponse("Book invalid")
+            return JsonResponse({'code':500,'status':'failed','msg':'Book invalid'})
         try:
             cart = Cart.objects.get(user=request.user,book=book)
         except Cart.DoesNotExist:
@@ -249,10 +250,10 @@ def cart_add(request):
             cart.user.add(request.user)
             cart.book.add(book)
             cart.save()
-            return HttpResponse("ok")
+            return JsonResponse({'code':200,'status':'success','msg':'Book was added to your basket'})
         cart.increment()
         cart.save()
-        return HttpResponse("ok")
+        return JsonResponse({'code':200,'status':'success','msg':'Book was added to your basket'})
 
 
 def cart_del(request):
@@ -263,3 +264,7 @@ def cart_del(request):
     except:
         return HttpResponse("error")
     return redirect('rango:cart')
+
+def cart_confirm(request):
+    //TODO
+    return JsonResponse({})
