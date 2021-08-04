@@ -29,6 +29,7 @@
         <a class="home-item" href="{% url 'rango:index' %}">Home</a>
         <a class="home-item" href="{% url 'rango:products' %}">Books</a>
     </div>
+    <div style="width: 320px;height:100px;display: inline-block;float: left;"></div>
     <div class="home-operation" style="z-index: 999">
         <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
         <div class="popup-box">
@@ -37,6 +38,10 @@
             <div class="popup-item"><a href="{% url 'rango:bought' %}">My Orders</a></div>
             <div class="popup-item"><a>Logout</a></div>
         </div>
+    </div>
+
+    <div class="home-operation" style="z-index: 999">
+        <div class="home-cart"><a href="{% url 'rango:cart' %}"><img src="{% static 'images/cart.png' %}"/></a></div>
     </div>
 </div>
 {% block body_block %}
