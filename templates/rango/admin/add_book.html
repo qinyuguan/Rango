@@ -1,0 +1,45 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Profile
+{% endblock %}
+{% block head_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" xmlns="http://www.w3.org/1999/html">
+{% endblock %}
+{% block body_block %}
+
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Add Book</h3></div>
+                <hr/>
+{#                <div class="sub-keyword">Book Name</div>#}
+                <div class="address-box">
+                    <div class="address-item">
+                        <div class="address-key">Book Name</div>
+                        <input type="text" class="layui-input address-val" name="name"/>
+                    </div>
+                    <div class="address-item">
+                        <div class="address-key">Author</div>
+                        <input type="text" class="layui-input address-val" name="author"/>
+                    </div>
+                    <div class="address-item">
+                        <div class="address-key">Image Link</div>
+                        <input type="text" class="layui-input address-val" name="img"/>
+                    </div>
+                    <div class="address-item">
+                        <div class="address-key">Description</div>
+                        <textarea class="layui-textarea address-val" name="desc"/></textarea>
+                    </div>
+                    <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
+                         class="layui-btn layui-btn-danger"><i
+                            class="layui-icon layui-icon-edit"></i>
+                        ADD
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

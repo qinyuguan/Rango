@@ -191,9 +191,6 @@ def users(request):
     return render(request, 'rango/users.html')
 
 
-def add_address(request):
-    return render(request, 'rango/add_address.html')
-
 def cart(request):
     return render(request, 'rango/cart.html')
 
@@ -207,3 +204,9 @@ def category(request, category_name):
 
 def categories(request):
     return render(request, 'rango/categories.html')
+
+def admin_books(request):
+    return render(request, 'rango/admin/books.html')
+
+def admin_add_books(request):
+    return render(request, 'rango/admin/add_book.html')

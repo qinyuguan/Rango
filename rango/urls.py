@@ -16,10 +16,13 @@ urlpatterns = [
     path('books/<slug:book_detail_slug>/', views.product, name='product'),
     path('bought/', views.bought, name='bought'),
     path('profile/', views.profile, name='profile'),
-    path('add_address/', views.add_address, name='add_address'),
     path('users/', views.users, name='users'),
     path('cart/', views.cart, name='cart'),
     path('comment/', views.comment, name='comment'),
     path('category/<slug:category_name>/', views.category, name='category'),
-    path('categories/', views.categories, name='categories')
+    path('categories/', views.categories, name='categories'),
+
+
+    path('admin/books/', views.admin_books, name='admin_books'),
+    path('admin/books/add',views.admin_add_books, name='admin_add_books')
 ]
