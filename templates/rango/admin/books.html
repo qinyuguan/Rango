@@ -1,0 +1,98 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Your Orders
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Manage Books</h3></div>
+                <div class="control">
+                    <a href="{% url 'rango:admin_add_books' %}" class="layui-btn add-btn"><i class="layui-icon layui-icon-add-1"></i> New Book</a>
+                </div>
+                <div class="control layui-input-inline">
+                    <input type="text" name="keyword" autocomplete="off" placeholder="Search: name"
+                           class="layui-input control-input"/>
+                    <button lay-submit class="control-btn" type="submit"><img width="20px" height="20px"
+                                                                              src="{% static 'images/search.png' %}"/>
+                    </button>
+                    <button lay-submit class="control-btn" type="submit"><img width="20px" height="20px"
+                                                                              src="{% static 'images/search.png' %}"/>
+                    </button>
+                </div>
+
+                <div class="order-list">
+                    <div class="order-item">
+
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
+                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Edit</a>
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-danger">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="order-item">
+
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
+                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Edit</a>
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-danger">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="order-item">
+
+                        <div class="order-detail">
+                            <div class="order-detail-img">
+                                <a>
+                                    <img src="{% static 'images/pan.png' %}"/>
+                                </a>
+                            </div>
+                            <div class="order-detail-title">
+                                <a>
+                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
+                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                </a>
+                            </div>
+                            <div class="order-operation">
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Edit</a>
+                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-danger">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
