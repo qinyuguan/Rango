@@ -1,11 +1,12 @@
 .home-nav{
-    text-align: center;
+
     background-color: #573BA3;
     height: 100px;
     border: 0px;
 }
 
 .home-logo{
+    padding-left: 10%;
     display: inline-block;
     padding-top: 10px;
 }
