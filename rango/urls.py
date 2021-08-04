@@ -21,6 +21,8 @@ urlpatterns = [
     path('comment/', views.comment, name='comment'),
     path('category/<slug:category_name>/', views.category, name='category'),
     path('categories/', views.categories, name='categories'),
+    path('cart/add/', views.cart_add,name='cart_add'),
+    path('cart/del/', views.cart_del,name='cart_del'),
 
 
     path('admin/books/', views.admin_books, name='admin_books'),

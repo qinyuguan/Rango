@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rango.models import Category, Page, UserProfile,BookDetail
+from rango.models import Category, Page, UserProfile,BookDetail, Cart
 
 
 
@@ -15,3 +15,4 @@ admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
 admin.site.register(UserProfile)
 admin.site.register(BookDetail)
+admin.site.register(Cart)

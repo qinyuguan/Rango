@@ -14,34 +14,37 @@
             <div class="login-header">
                 <h1>Register</h1>
             </div>
-            <div class="login-box">
-                <div class="login-item">
-                    <div class="login-label">Username</div>
-                    <div>
-                        <input class="login-input layui-input" type="text" />
+            <form method="post" action="{% url 'rango:register' %}">
+                <div class="login-box">
+                    <div class="login-item">
+                        <div class="login-label">Username</div>
+                        <div>
+                            <input name="username" autocomplete="off" class="login-input layui-input" type="text"/>
+                        </div>
                     </div>
-                </div>
-                <div class="login-item">
-                    <div class="login-label">Password</div>
-                    <div>
-                        <input class="login-input layui-input" type="password" />
+                    <div class="login-item">
+                        <div class="login-label">Password</div>
+                        <div>
+                            <input name="password" autocomplete="off" class="login-input layui-input" type="password"/>
+                        </div>
                     </div>
-                </div>
-                <div class="login-item">
-                    <div class="login-label">Password Confirmation</div>
-                    <div>
-                        <input class="login-input layui-input" type="password" />
+                    <div class="login-item">
+                        <div class="login-label">Password Confirmation</div>
+                        <div>
+                            <input class="login-input layui-input" name="password_repeat" autocomplete="off"
+                                   type="password"/>
+                        </div>
                     </div>
-                </div>
-                <div class="login-btn">
-                    <input class="layui-btn" value="CREATE"/>
-                </div>
+                    <div class="login-btn">
+                        <input class="layui-btn" type="submit" value="CREATE"/>
+                    </div>
 
-                <div class="login-bottom">
-                    or
-                    <a href="{% url 'rango:login' %}">Login as Existing User</a>
+                    <div class="login-bottom">
+                        or
+                        <a href="{% url 'rango:login' %}">Login as Existing User</a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock %}

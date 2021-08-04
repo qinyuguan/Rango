@@ -14,28 +14,31 @@
             <div class="login-header">
                 <h1>Login</h1>
             </div>
-            <div class="login-box">
-                <div class="login-item">
-                    <div class="login-label">Username</div>
-                    <div>
-                        <input class="login-input layui-input" type="text" />
+            <form method="post" action="{% url 'rango:login' %}">
+                {% csrf_token %}
+                <div class="login-box">
+                    <div class="login-item">
+                        <div class="login-label">Username</div>
+                        <div>
+                            <input class="login-input layui-input" autocomplete="off" name="username" type="text"/>
+                        </div>
                     </div>
-                </div>
-                <div class="login-item">
-                    <div class="login-label">Password</div>
-                    <div>
-                        <input class="login-input layui-input" type="password" />
+                    <div class="login-item">
+                        <div class="login-label">Password</div>
+                        <div>
+                            <input class="login-input layui-input" autocomplete="off" name="password" type="password"/>
+                        </div>
                     </div>
-                </div>
-                <div class="login-btn">
-                    <input class="layui-btn" value="LOGIN"/>
-                </div>
+                    <div class="login-btn">
+                        <input type="submit" class="layui-btn" value="LOGIN"/>
+                    </div>
 
-                <div class="login-bottom">
-                    or
-                    <a href="{% url 'rango:register' %}">Create a new account</a>
+                    <div class="login-bottom">
+                        or
+                        <a href="{% url 'rango:register' %}">Create a new account</a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock %}

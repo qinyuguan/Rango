@@ -6,6 +6,24 @@
 {% block head_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
 {% endblock %}
+
+{% block script_block %}
+    <script>
+        function addToCart(){
+            $.ajax({
+                url: '{% url 'rango:cart_add' %}',
+                type: 'POST',
+                data:{
+                    'slug': '{{ book.slug }}'
+                },
+                success:function (ret){
+
+                }
+            });
+        }
+    </script>
+{% endblock %}
+
 {% block body_block %}
     <div class="content content-nav-base datails-content">
 
@@ -36,10 +54,10 @@
                             </div>
                         </div>
                         <div class="operation">
-                            <div class="layui-btn layui-btn-danger"
+                            <a onclick="addToCart()" class="layui-btn layui-btn-danger"
                                  style="border-radius: 15px;background-color: #DE2454;"><i
                                     class="layui-icon layui-icon-cart-simple"></i>ADD TO BASKET
-                            </div>
+                            </a>
                             <div class="layui-btn layui-btn-primary" style="border-radius: 15px;"><i
                                     class="layui-icon layui-icon-camera"></i>ADD TO WISHLIST
                             </div>

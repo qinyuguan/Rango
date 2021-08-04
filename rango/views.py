@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from rango.models import Category
 from rango.models import Page
 from rango.models import BookDetail
+from rango.models import Cart
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
 
@@ -192,10 +193,22 @@ def users(request):
 
 
 def cart(request):
-    return render(request, 'rango/cart.html')
+    ret = []
+    total = 0
+    cart = Cart.objects.filter(user=request.user)
+    for c in cart:
+        book = c.book.first()
+        price = round(float(book.price[1:]) * c.num,2)
+        book.num = c.num
+        book.price = book.price[:1] + str(price)
+        total = round(total + price, 2)
+        ret.append(book)
+    context_dict = {"cart_list": ret, 'total':total}
+    return render(request, 'rango/cart.html',context=context_dict)
 
 def comment(request):
     return render(request, 'rango/comment.html')
+
 
 def category(request, category_name):
     context_dict = {}
@@ -217,3 +230,36 @@ def admin_categories(request):
 
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
+
+def cart_add(request):
+    if request.method == 'POST':
+        slug = request.POST.get('slug')
+        book = None
+        cart = None
+        try:
+            book = BookDetail.objects.get(slug=slug)
+        except BookDetail.DoesNotExist:
+            return HttpResponse("Book invalid")
+        try:
+            cart = Cart.objects.get(user=request.user,book=book)
+        except Cart.DoesNotExist:
+            print("Does Not Exist")
+            cart = Cart(num=1)
+            cart.save()
+            cart.user.add(request.user)
+            cart.book.add(book)
+            cart.save()
+            return HttpResponse("ok")
+        cart.increment()
+        cart.save()
+        return HttpResponse("ok")
+
+
+def cart_del(request):
+    try:
+        id = request.GET.get('id')
+        book = BookDetail.objects.get(id=id)
+        Cart.objects.get(user=request.user,book=book).delete()
+    except:
+        return HttpResponse("error")
+    return redirect('rango:cart')

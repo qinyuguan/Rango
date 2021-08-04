@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 
     <script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 <body>
 
@@ -35,7 +36,7 @@
         <div class="layui-input-inline">
             <input type="text" placeholder="Search" autocomplete="off" class="box layui-input">
             <button lay-submit class="btn" type="submit"><img width="20px" height="20px"
-                                                                  src="{% static 'images/search.png' %}"/></button>
+                                                              src="{% static 'images/search.png' %}"/></button>
         </div>
     </div>
     <div class="home-operation" style="z-index: 999">
@@ -69,5 +70,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+    })
+</script>
+{% block script_block %}
+{% endblock %}
 </body>
 </html>

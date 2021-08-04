@@ -68,3 +68,13 @@ class BookDetail(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(BookDetail, self).save(*args, **kwargs)
+
+
+class Cart(models.Model):
+    user = models.ManyToManyField(User)
+    book = models.ManyToManyField(BookDetail)
+    num = models.IntegerField(default=1)
+
+
+    def increment(self):
+        self.num = self.num + 1
