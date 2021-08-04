@@ -100,7 +100,7 @@
 
 
 .cate-list{
-    max-width: 1100px;
+    max-width: 90%;
     border-radius: 10px;
     display: grid;
     grid-column-gap: 10px;
