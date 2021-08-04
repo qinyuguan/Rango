@@ -29,7 +29,9 @@ SECRET_KEY = '*-%qmz(@=v+3#ne(jb86f2a69d)o&9)0+nn1))a@gug@rv5_10'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'rango.iamwz.online'
+]
 
 # Application definition
 
