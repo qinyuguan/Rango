@@ -13,7 +13,7 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Manage Books</h3></div>
                 <div class="control">
-                    <a class="layui-btn add-btn"><i class="layui-icon layui-icon-add-1"></i> New Book</a>
+                    <a href="{% url 'rango:admin_add_books' %}" class="layui-btn add-btn"><i class="layui-icon layui-icon-add-1"></i> New Book</a>
                 </div>
                 <div class="control layui-input-inline">
                     <input type="text" name="keyword" autocomplete="off" placeholder="Search: name"
