@@ -2,6 +2,7 @@
     text-align: center;
     background-color: #573BA3;
     height: 100px;
+    border: 0px;
 }
 
 .home-logo{
@@ -28,6 +29,7 @@
     font-weight: bolder;
     background-color: #573BA3;
     color: white;
+    border: 0px;
 }
 
 .search{
