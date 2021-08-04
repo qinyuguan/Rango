@@ -210,3 +210,10 @@ def admin_books(request):
 
 def admin_add_books(request):
     return render(request, 'rango/admin/add_book.html')
+
+
+def admin_categories(request):
+    return render(request, 'rango/admin/categories.html')
+
+def admin_add_categories(request):
+    return render(request, 'rango/admin/add_categories.html')

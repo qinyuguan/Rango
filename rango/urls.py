@@ -24,5 +24,7 @@ urlpatterns = [
 
 
     path('admin/books/', views.admin_books, name='admin_books'),
-    path('admin/books/add',views.admin_add_books, name='admin_add_books')
+    path('admin/books/add',views.admin_add_books, name='admin_add_books'),
+    path('admin/categories/', views.admin_categories, name='admin_categories'),
+    path('admin/categories/add',views.admin_add_categories, name='admin_add_categories')
 ]
