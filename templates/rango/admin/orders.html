@@ -1,0 +1,127 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Manage Orders
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bought.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Manage Orders</h3></div>
+                <div class="order-list">
+                    {% if orders %}
+                        {% for order in orders %}
+                            <div class="order-item">
+                                <div class="order-header">
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            ORDER PLACED
+                                        </div>
+                                        <div class="order-header-item-val">
+                                            {{ order.order.date }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            PAID
+                                        </div>
+                                        <div class="order-header-item-val">
+                                            {{ order.order.price }}*{{ order.order.quantity }}={{ order.order.total_price }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item" style="width: 250px;">
+                                        <div class="order-header-item-key">
+                                            ORDER NUMBER
+                                        </div>
+                                        <div style="font-size: 13px;" class="order-header-item-val">
+                                            {{ order.order.order_no }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            STATUS
+                                        </div>
+                                        <div class="order-header-item-val bolder">
+                                            {% if order.order.status == 0 %}
+                                                PENDING
+                                            {% elif order.order.status == 1 %}
+                                                SHIPING
+                                            {% elif order.order.status == 2 %}
+                                                FINISHED
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-detail">
+                                    <div class="order-detail-img">
+                                        <a href="{% url 'rango:product' order.book.slug %}">
+                                            <img src="{{ order.book.img }}"/>
+                                        </a>
+                                    </div>
+                                    <div class="order-detail-title">
+                                        <a href="{% url 'rango:product' order.book.slug %}">
+                                            {{ order.book.title }} * {{ order.order.quantity }}
+                                        </a>
+                                        <hr/>
+                                        {{ order.order.address }} - {{ order.order.name }}({{ order.order.phone }})
+                                    </div>
+                                    <div class="order-operation">
+                                        {% if order.order.status == 0 %}
+                                            <a onclick="setStatus('{{ order.order.order_no }}',1)"
+                                               class="layui-btn layui-btn-primary">Mark As Shiping</a>
+                                        {% elif order.order.status == 1 %}
+                                            <a onclick="setStatus('{{ order.order.order_no }}',2)"
+                                               class="layui-btn layui-btn-primary">Mark As Finished</a>
+                                        {% else %}
+                                           
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="nothing">You have no order records</div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            window.setStatus = function (order_no, code) {
+                $.ajax({
+                    url: "{% url 'rango:admin_orders_status' %}",
+                    type: "POST",
+                    data: {
+                        'order_no': order_no,
+                        'code': code
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Status was set successfully', {
+                                btn: ['Got it'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:admin_orders' %}'
+                            });
+                        }
+                    }
+                })
+
+            }
+        });
+    </script>
+{% endblock %}
