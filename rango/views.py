@@ -13,6 +13,7 @@ from rango.models import Comment
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
 from django.http import JsonResponse
+from rango.permissions import user_required, admin_required
 
 
 def index(request):
@@ -183,7 +184,7 @@ def product(request, book_detail_slug):
     except BookDetail.DoesNotExist:
         return redirect('rango:index')
 
-
+@user_required()
 def bought(request):
     user = request.user
     orders = Order.objects.filter(user=user).order_by("-date")
@@ -196,11 +197,11 @@ def bought(request):
     print(context_dict)
     return render(request, 'rango/bought.html', context=context_dict)
 
-
+@login_required
 def profile(request):
     return render(request, 'rango/profile.html')
 
-
+@admin_required()
 def users(request):
     return render(request, 'rango/users.html')
 
@@ -221,22 +222,22 @@ def categories(request):
     context_dict = {'categories': ret}
     return render(request, 'rango/categories.html', context=context_dict)
 
-
+@admin_required()
 def admin_books(request):
     keyword = request.GET.get("keyword")
     if keyword != None and keyword != "":
         book_list = BookDetail.objects.filter(title__contains=keyword).order_by('title')[:20]
-        context_dict = {'book_list': book_list, 'keyword':keyword}
+        context_dict = {'book_list': book_list, 'keyword': keyword}
         return render(request, 'rango/admin/books.html', context=context_dict)
     book_list = BookDetail.objects.order_by('title')[:20]
     context_dict = {'book_list': book_list}
     return render(request, 'rango/admin/books.html', context=context_dict)
 
-
+@admin_required()
 def admin_add_books(request):
     return render(request, 'rango/admin/add_book.html')
 
-
+@admin_required()
 def admin_edit_books(request, slug):
     if request.method == 'POST':
         id = request.POST.get('id')
@@ -247,7 +248,7 @@ def admin_edit_books(request, slug):
         previous_title = request.POST.get('previous_title')
         # TODO: UPDATE CATEGORY
         category = request.POST.get('category')
-        book = BookDetail.objects.get(id=id,title=previous_title)
+        book = BookDetail.objects.get(id=id, title=previous_title)
         book.title = title
         book.author = author
         book.desc = desc
@@ -259,21 +260,21 @@ def admin_edit_books(request, slug):
         context_dict = {'book': book}
         return render(request, 'rango/admin/edit_book.html', context=context_dict)
 
-
-def admin_del_books(request,slug):
+@admin_required()
+def admin_del_books(request, slug):
     book = BookDetail.objects.get(slug=slug)
     book.delete()
     return redirect('rango:admin_books')
 
-
+@admin_required()
 def admin_categories(request):
     return render(request, 'rango/admin/categories.html')
 
-
+@admin_required()
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
 
-
+@admin_required()
 def admin_orders(request):
     keyword = request.GET.get("keyword")
     # if keyword != None and keyword != "":
@@ -285,11 +286,12 @@ def admin_orders(request):
     for order in order_list:
         user = order.user.first()
         book = order.book.first()
-        temp_dict = {'book': book, 'user': user, 'order':order}
+        temp_dict = {'book': book, 'user': user, 'order': order}
         ret.append(temp_dict)
     context_dict = {'orders': ret}
     return render(request, 'rango/admin/orders.html', context=context_dict)
 
+@admin_required()
 def admin_orders_status(request):
     if request.method == 'POST':
         status = request.POST.get('code')
@@ -304,8 +306,7 @@ def admin_orders_status(request):
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Status set successfully'})
 
 
-
-
+@user_required()
 def cart(request):
     ret = []
     total = 0
@@ -321,6 +322,7 @@ def cart(request):
     return render(request, 'rango/cart.html', context=context_dict)
 
 
+@user_required(ajax=True)
 def cart_add(request):
     if request.method == 'POST':
         slug = request.POST.get('slug')
@@ -345,6 +347,7 @@ def cart_add(request):
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Book was added to your basket'})
 
 
+@user_required()
 def cart_del(request):
     try:
         id = request.GET.get('id')
@@ -355,6 +358,7 @@ def cart_del(request):
     return redirect('rango:cart')
 
 
+@user_required()
 def cart_confirm(request):
     user = request.user
     carts = Cart.objects.filter(user=user)
@@ -368,7 +372,7 @@ def cart_confirm(request):
         price = round(float(book.price[1:]), 2)
         total = round(float(num * price), 2)
         all_total += total
-        all_total = round(all_total,2)
+        all_total = round(all_total, 2)
         price = book.price[:1] + str(price)
         total = book.price[:1] + str(total)
         temp = {'book': book, 'num': num, 'price': price, 'total': total}
@@ -378,6 +382,7 @@ def cart_confirm(request):
     return render(request, 'rango/confirm.html', context=context_dict)
 
 
+@user_required()
 def cart_pay(request):
     if request.method == 'POST':
         user = request.user
@@ -405,6 +410,7 @@ def cart_pay(request):
     return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Method not support'})
 
 
+@user_required()
 def comment(request, order_no):
     if request.method == 'POST':
         content = request.POST.get('comment')

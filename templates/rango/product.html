@@ -136,10 +136,21 @@
                                 btn: ['Yes', 'No'],
                                 title: 'Information',
                                 closeBtn: 1,
+                                icon: 1,
                                 shadeClose: true,
                             }, function (index, layero) {
                                 location.href = '{% url 'rango:cart' %}'
                             }, function (index) {
+                                layer.close(index)
+                            });
+                        }else if (ret.code==500){
+                            layer.confirm(ret.msg, {
+                                icon: 2,
+                                btn: ['Got it'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
                                 layer.close(index)
                             });
                         }
