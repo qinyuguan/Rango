@@ -13,195 +13,102 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Your Orders</h3></div>
                 <div class="order-list">
-                    <div class="order-item">
-                        <div class="order-header">
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER PLACED
+                    {% if orders %}
+                        {% for order in orders %}
+                            <div class="order-item">
+                                <div class="order-header">
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            ORDER PLACED
+                                        </div>
+                                        <div class="order-header-item-val">
+                                            {{ order.order.date }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            TOTAL
+                                        </div>
+                                        <div class="order-header-item-val">
+                                            {{ order.order.price }}*{{ order.order.quantity }}={{ order.order.total_price }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            DISPATCH TO
+                                        </div>
+                                        <div class="order-header-item-val">
+                                            {{ order.order.name }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item" style="width: 250px;">
+                                        <div class="order-header-item-key">
+                                            ORDER NUMBER
+                                        </div>
+                                        <div style="font-size: 13px;" class="order-header-item-val">
+                                            {{ order.order.order_no }}
+                                        </div>
+                                    </div>
+                                    <div class="order-header-item">
+                                        <div class="order-header-item-key">
+                                            STATUS
+                                        </div>
+                                        <div class="order-header-item-val bolder">
+                                            {% if order.order.status == 0 %}
+                                                PENDING
+                                            {% elif order.order.status == 1 %}
+                                                SHIPING
+                                            {% elif order.order.status == 2 %}
+                                                FINISHED
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="order-header-item-val">
-                                    27 July 2021
+                                <div class="order-detail">
+                                    <div class="order-detail-img">
+                                        <a href="{% url 'rango:product' order.book.slug %}">
+                                            <img src="{{ order.book.img }}"/>
+                                        </a>
+                                    </div>
+                                    <div class="order-detail-title">
+                                        <a href="{% url 'rango:product' order.book.slug %}">
+                                            {{ order.book.title }} * {{ order.order.quantity }}
+                                        </a>
+                                    </div>
+                                    <div class="order-operation">
+                                        <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Write a
+                                            product review</a>
+                                        <a onclick="returnItem()"
+                                           class="layui-btn layui-btn-primary">Return items</a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    TOTAL
-                                </div>
-                                <div class="order-header-item-val">
-                                    £29.99
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    DISPATCH TO
-                                </div>
-                                <div class="order-header-item-val">
-                                    ALEX WANG
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER NUMBER
-                                </div>
-                                <div class="order-header-item-val">
-                                    000000000000000
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    STATUS
-                                </div>
-                                <div class="order-header-item-val bolder">
-                                    SHIPING
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-detail">
-                            <div class="order-detail-img">
-                                <a>
-                                    <img src="{% static 'images/pan.png' %}"/>
-                                </a>
-                            </div>
-                            <div class="order-detail-title">
-                                <a>
-                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
-                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
-                                </a>
-                            </div>
-                            <div class="order-operation">
-                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Write a product review</a>
-                                <a onclick="javascript:alert('Please contact the Customer Service')" class="layui-btn layui-btn-primary">Return items</a>
-                            </div>
-                        </div>
 
-                    </div>
-                    <div class="order-item">
-                        <div class="order-header">
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER PLACED
-                                </div>
-                                <div class="order-header-item-val">
-                                    27 July 2021
-                                </div>
                             </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    TOTAL
-                                </div>
-                                <div class="order-header-item-val">
-                                    £29.99
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    DISPATCH TO
-                                </div>
-                                <div class="order-header-item-val">
-                                    ALEX WANG
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER NUMBER
-                                </div>
-                                <div class="order-header-item-val">
-                                    000000000000000
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    STATUS
-                                </div>
-                                <div class="order-header-item-val bolder">
-                                    SHIPING
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-detail">
-                            <div class="order-detail-img">
-                                <a>
-                                    <img src="{% static 'images/pan.png' %}"/>
-                                </a>
-                            </div>
-                            <div class="order-detail-title">
-                                <a>
-                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
-                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
-                                </a>
-                            </div>
-                            <div class="order-operation">
-                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Write a product review</a>
-                                <a onclick="javascript:alert('Please contact the Customer Service')" class="layui-btn layui-btn-primary">Return items</a>
-                            </div>
-                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="nothing">You have no order records</div>
+                    {% endif %}
 
-                    </div>
-                    <div class="order-item">
-                        <div class="order-header">
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER PLACED
-                                </div>
-                                <div class="order-header-item-val">
-                                    27 July 2021
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    TOTAL
-                                </div>
-                                <div class="order-header-item-val">
-                                    £29.99
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    DISPATCH TO
-                                </div>
-                                <div class="order-header-item-val">
-                                    ALEX WANG
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    ORDER NUMBER
-                                </div>
-                                <div class="order-header-item-val">
-                                    000000000000000
-                                </div>
-                            </div>
-                            <div class="order-header-item">
-                                <div class="order-header-item-key">
-                                    STATUS
-                                </div>
-                                <div class="order-header-item-val bolder">
-                                    SHIPING
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-detail">
-                            <div class="order-detail-img">
-                                <a>
-                                    <img src="{% static 'images/pan.png' %}"/>
-                                </a>
-                            </div>
-                            <div class="order-detail-title">
-                                <a>
-                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
-                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
-                                </a>
-                            </div>
-                            <div class="order-operation">
-                                <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Write a product review</a>
-                                <a onclick="javascript:alert('Please contact the Customer Service')" class="layui-btn layui-btn-primary">Return items</a>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
 
     </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            window.returnItem = function () {
+                layer.open({
+                    btn: ['Got it'],
+                    title: 'Information',
+                    closeBtn: 1,
+                    shadeClose: true,
+                    content: 'Please Contract Customer Service'
+                });
+            }
+        });
+    </script>
 {% endblock %}

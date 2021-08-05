@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -9,12 +8,14 @@ from rango.models import Category
 from rango.models import Page
 from rango.models import BookDetail
 from rango.models import Cart
+from rango.models import Order
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
 from django.http import JsonResponse
 
+
 def index(request):
-    #TODO:- order by count of like
+    # TODO:- order by count of like
     book_list = BookDetail.objects.order_by('title')[:20]
     context_dict = {'book_list': book_list}
     visitor_cookie_handler(request)
@@ -137,7 +138,6 @@ def user_login(request):
         return render(request, 'rango/login.html')
 
 
-
 @login_required()
 def user_logout(request):
     logout(request)
@@ -170,7 +170,7 @@ def products(request):
     return render(request, 'rango/products.html', context=context_dict)
 
 
-def product(request,book_detail_slug):
+def product(request, book_detail_slug):
     context_dict = {}
     try:
         book = BookDetail.objects.get(slug=book_detail_slug)
@@ -181,7 +181,16 @@ def product(request,book_detail_slug):
 
 
 def bought(request):
-    return render(request, 'rango/bought.html')
+    user = request.user
+    orders = Order.objects.filter(user=user)
+    ret = []
+    for order in orders:
+        book = order.book.first()
+        temp_dict = {'book':book, 'order':order}
+        ret.append(temp_dict)
+    context_dict = {'orders':ret}
+    print(context_dict)
+    return render(request, 'rango/bought.html',context=context_dict)
 
 
 def profile(request):
@@ -198,13 +207,14 @@ def cart(request):
     cart = Cart.objects.filter(user=request.user)
     for c in cart:
         book = c.book.first()
-        price = round(float(book.price[1:]) * c.num,2)
+        price = round(float(book.price[1:]) * c.num, 2)
         book.num = c.num
         book.price = book.price[:1] + str(price)
         total = round(total + price, 2)
         ret.append(book)
-    context_dict = {"cart_list": ret, 'total':total}
-    return render(request, 'rango/cart.html',context=context_dict)
+    context_dict = {"cart_list": ret, 'total': total}
+    return render(request, 'rango/cart.html', context=context_dict)
+
 
 def comment(request):
     return render(request, 'rango/comment.html')
@@ -215,11 +225,21 @@ def category(request, category_name):
     context_dict['category_name'] = category_name
     return render(request, 'rango/category.html', context=context_dict)
 
+
 def categories(request):
-    return render(request, 'rango/categories.html')
+    # TODO- create new table for category, create slug name
+    ret = set()
+    context_dict = {}
+    querySet = BookDetail.objects.all()
+    for c in querySet:
+        ret = ret.union(set(c.get_categories()))
+    context_dict = {'categories': ret}
+    return render(request, 'rango/categories.html', context=context_dict)
+
 
 def admin_books(request):
     return render(request, 'rango/admin/books.html')
+
 
 def admin_add_books(request):
     return render(request, 'rango/admin/add_book.html')
@@ -227,6 +247,7 @@ def admin_add_books(request):
 
 def admin_categories(request):
     return render(request, 'rango/admin/categories.html')
+
 
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
@@ -240,9 +261,9 @@ def cart_add(request):
         try:
             book = BookDetail.objects.get(slug=slug)
         except BookDetail.DoesNotExist:
-            return JsonResponse({'code':500,'status':'failed','msg':'Book invalid'})
+            return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Book invalid'})
         try:
-            cart = Cart.objects.get(user=request.user,book=book)
+            cart = Cart.objects.get(user=request.user, book=book)
         except Cart.DoesNotExist:
             print("Does Not Exist")
             cart = Cart(num=1)
@@ -250,21 +271,66 @@ def cart_add(request):
             cart.user.add(request.user)
             cart.book.add(book)
             cart.save()
-            return JsonResponse({'code':200,'status':'success','msg':'Book was added to your basket'})
+            return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Book was added to your basket'})
         cart.increment()
         cart.save()
-        return JsonResponse({'code':200,'status':'success','msg':'Book was added to your basket'})
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Book was added to your basket'})
 
 
 def cart_del(request):
     try:
         id = request.GET.get('id')
         book = BookDetail.objects.get(id=id)
-        Cart.objects.get(user=request.user,book=book).delete()
+        Cart.objects.get(user=request.user, book=book).delete()
     except:
         return HttpResponse("error")
     return redirect('rango:cart')
 
+
 def cart_confirm(request):
-    //TODO
-    return JsonResponse({})
+    user = request.user
+    carts = Cart.objects.filter(user=user)
+    ret = []
+    all_total = 0
+    if (len(carts) == 0):
+        return redirect("rango:cart")
+    for cart in carts:
+        book = cart.book.first()
+        num = int(cart.num)
+        price = round(float(book.price[1:]), 2)
+        total = round(float(num * price), 2)
+        all_total += total
+        price = book.price[:1] + str(price)
+        total = book.price[:1] + str(total)
+        temp = {'book': book, 'num': num, 'price': price, 'total': total}
+        ret.append(temp)
+
+    context_dict = {'confirm': ret, 'all_total': all_total}
+    return render(request, 'rango/confirm.html', context=context_dict)
+
+
+def cart_pay(request):
+    if request.method == 'POST':
+        user = request.user
+        name = request.POST.get('name')
+        tel = request.POST.get('tel')
+        address = request.POST.get('address')
+        carts = Cart.objects.filter(user=user)
+        if (len(carts) == 0):
+            return redirect("rango:cart")
+        for cart in carts:
+            book = cart.book.first()
+            num = int(cart.num)
+            price = round(float(book.price[1:]), 2)
+            total = round(float(num * price), 2)
+            price = book.price[:1] + str(price)
+            total = book.price[:1] + str(total)
+            order = Order(price=price, total_price=total, quantity=num, name=name, address=address, phone=tel,
+                          date=datetime.now())
+            order.save()
+            order.user.add(user)
+            order.book.add(book)
+            order.save()
+            cart.delete()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Book was added to your basket'})
+    return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Method not support'})

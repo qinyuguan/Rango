@@ -39,7 +39,8 @@
                             Total: {{ total }}
                         </div>
                         <div class="cart-total">
-                            <a class="layui-btn"><i class="layui-icon layui-icon-ok"></i>Confirm</a>
+                            <a href="{% url 'rango:cart_confirm' %}" class="layui-btn"><i
+                                    class="layui-icon layui-icon-ok"></i>Confirm</a>
                         </div>
                     {% else %}
 

@@ -1,0 +1,110 @@
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+    Order Confirmation
+{% endblock %}
+{% block body_block %}
+    {% block head_block %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/confirm.css' %}">
+    {% endblock %}
+    <div class="content content-nav-base datails-content">
+
+        <div class="data-cont-wrap w1200">
+            <div class="product-intro layui-clear" id="intro">
+                <div class="keyword"><h3>Confirmation</h3></div>
+                <hr/>
+                <div class="cart-list">
+                    {% if confirm %}
+                        {% for book in confirm %}
+                            <div class="cart-item">
+                                {#                                <div class="cart-img"><img#}
+                                {#                                        src="{{ book.book.img }}"/>#}
+                                {#                                </div>#}
+                                <div class="cart-title">
+                                    {{ book.book.title }}
+                                </div>
+                                <div style="display: inline-block;float: right;">
+                                    <div class="cart-qty">
+                                        Qty: {{ book.num }}
+                                    </div>
+                                    <div class="cart-price">
+                                        {{ book.price }}
+                                    </div>
+                                    <div class="cart-price">
+                                        {{ book.total }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="cart-total">
+                            Total: {{ all_total }}
+                        </div>
+
+                        <div class="confirm-address">
+                            <h2>Address</h2>
+                            <div class="address-item">
+                                <div class="address-key">Specified address with postcode</div>
+                                <input type="text" id="address" class="layui-input address-val" name="address"/>
+                            </div>
+                            <div class="address-item">
+                                <div class="address-key">Receiver full name</div>
+                                <input type="text" id="name" class="layui-input address-val" name="name"/>
+                            </div>
+                            <div class="address-item">
+                                <div class="address-key">Telephone</div>
+                                <input type="text" id="tel" class="layui-input address-val" name="tel"/>
+                            </div>
+                        </div>
+                        <div class="cart-total">
+                            <a href="{% url 'rango:cart' %}" class="layui-btn layui-btn-primary"><i
+                                    class="layui-icon layui-icon-prev"></i>Back</a>
+                            <a onclick="doPay()" class="layui-btn"><i
+                                    class="layui-icon layui-icon-next"></i>Pay</a>
+                        </div>
+                    {% else %}
+                        <div class="cart-nothing">You have nothing in your basket</div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
+            window.doPay = function () {
+                $.ajax({
+                    url: '{% url 'rango:cart_pay' %}',
+                    type: 'POST',
+                    data: {
+                        'name': $('#name').val(),
+                        'tel': $('#tel').val(),
+                        'address': $('#address').val()
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Order was made successfully, do you want to go to order page?', {
+                                btn: ['Yes', 'No'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:bought' %}'
+                            }, function (index) {
+                                location.href = '{% url 'rango:cart' %}'
+                            });
+                        }
+                    }
+                })
+            }
+
+
+        });
+    </script>
+{% endblock %}

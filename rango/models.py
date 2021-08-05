@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
-from uuid import uuid1
+from uuid import uuid1, uuid4
+from shortuuidfield import ShortUUIDField
 
 # Create your models here.
 from django.template.defaultfilters import slugify
@@ -83,7 +84,6 @@ class Cart(models.Model):
     def increment(self):
         self.num = self.num + 1
 
-
 class Order(models.Model):
     user = models.ManyToManyField(User)
     book = models.ManyToManyField(BookDetail)
@@ -94,5 +94,7 @@ class Order(models.Model):
     address = models.CharField(max_length=1000)
     phone = models.CharField(max_length=255)
     status = models.IntegerField(default=0)
-    date = models.DateField()
-    order_no = models.UUIDField(primary_key=False, default=uuid1, editable=False)
+    date = models.DateTimeField()
+    order_no = ShortUUIDField(primary_key=False, default=uuid1, editable=False)
+
+
