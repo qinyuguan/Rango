@@ -31,7 +31,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'rango.iamwz.online'
+    'rango.iamwz.online',
+    '139.59.171.69',
+    '*'
 ]
 
 # Application definition
