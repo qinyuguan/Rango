@@ -43,7 +43,7 @@
                                             {{ book.price }}
                                         </div>
                                         <div class="book-add">
-                                            <div style="background-color: #DE2454;border-radius: 15px;"
+                                            <div onclick="addToCart('{{ book.slug }}')" style="background-color: #DE2454;border-radius: 15px;"
                                                  class="layui-btn layui-btn-danger"><i
                                                     class="layui-icon layui-icon-cart-simple"></i>
                                                 ADD TO BASKET
@@ -62,4 +62,35 @@
         </div>
 
     </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            window.addToCart = function (slug) {
+                $.ajax({
+                    url: '{% url 'rango:cart_add' %}',
+                    type: 'POST',
+                    data: {
+                        'slug': slug
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Book was added to your basket, do you want to check?', {
+                                btn: ['Yes', 'No'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:cart' %}'
+                            }, function (index) {
+                                layer.close(index)
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 {% endblock %}

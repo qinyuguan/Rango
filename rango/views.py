@@ -183,7 +183,7 @@ def product(request, book_detail_slug):
 
 def bought(request):
     user = request.user
-    orders = Order.objects.filter(user=user)
+    orders = Order.objects.filter(user=user).order_by("-date")
     ret = []
     for order in orders:
         book = order.book.first()
@@ -333,6 +333,7 @@ def cart_confirm(request):
         price = round(float(book.price[1:]), 2)
         total = round(float(num * price), 2)
         all_total += total
+        all_total = round(all_total,2)
         price = book.price[:1] + str(price)
         total = book.price[:1] + str(total)
         temp = {'book': book, 'num': num, 'price': price, 'total': total}
