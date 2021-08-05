@@ -53,7 +53,7 @@ if __name__ == '__main__':
     # download_html()
     # populate()
     base_url = 'https://uk.bookshop.org/'
-    for file in os.listdir(r"./downloaded"):
+    for file in os.listdir(r"./downloaded")[:500]:
         with open("./downloaded/" + file, 'r') as f:
             try:
                 html = etree.HTML(f.read())
@@ -85,12 +85,17 @@ if __name__ == '__main__':
                                                         publish_date=publish_date, price=price, language=language,
                                                         book_type=book_type, ISBN=ISBN, desc=desc, category=categories)[
                     0]
-                book.save()
+                if book.language is "English":
+                    book.save()
             except Exception as exc:
                 print("error occured when fetch:  ", file)
                 print(exc)
 
     # build the category table
+    for b in BookDetail.objects.order_by('title')[:50]:
+        b.delete()
+
+
     category_set = set()
     for book in BookDetail.objects.order_by('title'):
         for cate in book.category.split(';'):
