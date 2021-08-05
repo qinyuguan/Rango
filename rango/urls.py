@@ -31,9 +31,11 @@ urlpatterns = [
     path('admin/books/', views.admin_books, name='admin_books'),
     path('admin/books/add/', views.admin_add_books, name='admin_add_books'),
     path('admin/books/edit/<slug:slug>/', views.admin_edit_books, name='admin_edit_books'),
-    path('admin/books/edl/<slug:slug>/', views.admin_del_books, name='admin_del_books'),
+    path('admin/books/del/<slug:slug>/', views.admin_del_books, name='admin_del_books'),
     path('admin/categories/', views.admin_categories, name='admin_categories'),
     path('admin/categories/add/', views.admin_add_categories, name='admin_add_categories'),
+    path('admin/categories/edit/<slug:slug>/', views.admin_edit_categories, name='admin_edit_categories'),
+    path('admin/categories/del/<slug:slug>/', views.admin_del_categories, name='admin_del_categories'),
     path('admin/orders/', views.admin_orders, name='admin_orders'),
     path('admin/orders/status', views.admin_orders_status, name='admin_orders_status'),
 ]

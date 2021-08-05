@@ -184,6 +184,7 @@ def product(request, book_detail_slug):
     except BookDetail.DoesNotExist:
         return redirect('rango:index')
 
+
 @user_required()
 def bought(request):
     user = request.user
@@ -197,9 +198,11 @@ def bought(request):
     print(context_dict)
     return render(request, 'rango/bought.html', context=context_dict)
 
+
 @login_required
 def profile(request):
     return render(request, 'rango/profile.html')
+
 
 @admin_required()
 def users(request):
@@ -225,6 +228,7 @@ def categories(request):
     context_dict = {'category_list': category_list}
     return render(request, 'rango/categories.html', context=context_dict)
 
+
 @admin_required()
 def admin_books(request):
     keyword = request.GET.get("keyword")
@@ -235,6 +239,7 @@ def admin_books(request):
     book_list = BookDetail.objects.order_by('title')[:20]
     context_dict = {'book_list': book_list}
     return render(request, 'rango/admin/books.html', context=context_dict)
+
 
 @admin_required()
 def admin_add_books(request):
@@ -251,7 +256,7 @@ def admin_add_books(request):
         book.desc = desc
         book.img = img
         book.save()
-        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Edit made successfully'})
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Add made successfully'})
     else:
         return render(request, 'rango/admin/add_book.html')
 
@@ -279,36 +284,61 @@ def admin_edit_books(request, slug):
         context_dict = {'book': book}
         return render(request, 'rango/admin/edit_book.html', context=context_dict)
 
+
 @admin_required()
 def admin_del_books(request, slug):
     book = BookDetail.objects.get(slug=slug)
     book.delete()
     return redirect('rango:admin_books')
 
+
 @admin_required()
 def admin_categories(request):
+    keyword = request.GET.get("keyword")
+    if keyword != None and keyword != "":
+        category_list = list(Category.objects.filter(name__contains=keyword).order_by('name')[:20])
+        context_dict = {'category_list': category_list, 'keyword': keyword}
+        return render(request, 'rango/admin/categories.html', context=context_dict)
     category_list = list(Category.objects.all()[:20])
-    context_dict = {'category_list':category_list}
+    context_dict = {'category_list': category_list}
     return render(request, 'rango/admin/categories.html', context=context_dict)
+
 
 @admin_required()
 def admin_add_categories(request):
-    # TODO: ADD CATEGORIES
-    return render(request, 'rango/admin/add_categories.html')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        category = Category(name=name)
+        category.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Add made successfully'})
+    else:
+        return render(request, 'rango/admin/add_categories.html')
+
 
 @admin_required()
-def admin_edit_categories(request):
-    # TODO: EDIT CATEGORY
-    return render(request, 'rango/admin/add_categories.html')
+def admin_edit_categories(request, slug):
+    if request.method == 'POST':
+        category = Category.objects.get(slug=slug)
+        name = request.POST.get('name')
+        category.name = name
+        category.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Edit made successfully'})
+    else:
+        category = Category.objects.get(slug=slug)
+        context_dict = {'category': category}
+        return render(request, 'rango/admin/edit_category.html', context=context_dict)
+
 
 @admin_required()
-def admin_del_categories(request):
-    # TODO: DELETE CATEGORY
-    return render(request, 'rango/admin/add_categories.html')
+def admin_del_categories(request, slug):
+    category = Category.objects.get(slug=slug)
+    category.delete()
+    return redirect('rango:admin_categories')
+
 
 @admin_required()
 def admin_orders(request):
-    keyword = request.GET.get("keyword")
+    # keyword = request.GET.get("keyword")
     # if keyword != None and keyword != "":
     #     order_list = Order.objects.filter().order_by('-date')[:20]
     #     context_dict = {'book_list': book_list, 'keyword':keyword}
@@ -322,6 +352,7 @@ def admin_orders(request):
         ret.append(temp_dict)
     context_dict = {'orders': ret}
     return render(request, 'rango/admin/orders.html', context=context_dict)
+
 
 @admin_required()
 def admin_orders_status(request):

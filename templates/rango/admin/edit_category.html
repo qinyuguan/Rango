@@ -12,18 +12,18 @@
 
         <div class="data-cont-wrap w1200">
             <div class="product-intro layui-clear" id="intro">
-                <div class="keyword"><h3>Add Category</h3></div>
+                <div class="keyword"><h3>Edit Category</h3></div>
                 <hr/>
                 <div class="address-box">
                     <div class="address-item">
                         <div class="address-key">Category Name</div>
-                        <input type="text" class="layui-input address-val" id="name" name="name"/>
+                        <input type="text" class="layui-input address-val" id="name" name="name" value="{{ category.name }}"/>
                     </div>
 
-                    <a onclick="add()" style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
+                    <a onclick="edit()" style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
                          class="layui-btn layui-btn-danger"><i
                             class="layui-icon layui-icon-edit"></i>
-                        ADD
+                        SAVE
                     </a>
                 </div>
             </div>
@@ -37,16 +37,16 @@
         layui.use('layer', function () {
             var layer = layui.layer;
 
-            window.add = function () {
+            window.edit = function () {
                 $.ajax({
-                    url: '{% url 'rango:admin_add_categories' %}',
+                    url: '{% url 'rango:admin_edit_categories' category.slug %}',
                     type: 'POST',
                     data: {
-                        'name':$('#name').val()
+                        'name': $('#name').val()
                     },
                     success: function (ret) {
                         if (ret.code == 200) {
-                            layer.confirm('Add made successfully', {
+                            layer.confirm('Edit made successfully', {
                                 btn: ['Got it'],
                                 title: 'Information',
                                 closeBtn: 1,

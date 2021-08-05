@@ -17,13 +17,11 @@
                             class="layui-icon layui-icon-add-1"></i> New Category</a>
                 </div>
                 <div class="control layui-input-inline">
-                    <input type="text" name="keyword" autocomplete="off" placeholder="Search: name"
+                    <input value="{{ keyword }}" id="keyword" type="text" name="keyword" autocomplete="off"
+                           placeholder="Search: name"
                            class="layui-input control-input"/>
-                    <button lay-submit class="control-btn" type="submit"><img width="20px" height="20px"
-                                                                              src="{% static 'images/search.png' %}"/>
-                    </button>
-                    <button lay-submit class="control-btn" type="submit"><img width="20px" height="20px"
-                                                                              src="{% static 'images/search.png' %}"/>
+                    <button onclick="search()" class="control-btn" type="submit"><img width="20px" height="20px"
+                                                                                      src="{% static 'images/search.png' %}"/>
                     </button>
                 </div>
 
@@ -46,7 +44,8 @@
                                 <tr>
                                     <td>{{ category.name }}</td>
                                     <td>
-                                        <a class="layui-btn layui-btn-sm layui-btn-primary">Edit</a>
+                                        <a href="{% url 'rango:admin_edit_categories' category.slug %}"
+                                           class="layui-btn layui-btn-sm layui-btn-primary">Edit</a>
                                         <a class="layui-btn layui-btn-sm layui-btn-danger">Delete</a>
                                     </td>
                                 </tr>
@@ -61,3 +60,14 @@
 
     </div>
 {% endblock %}
+
+{% block script_block %}
+    <script>
+        function search() {
+            var keyword = $('#keyword').val()
+            location.href = "{% url 'rango:admin_categories' %}?keyword=" + keyword;
+        }
+    </script>
+{% endblock %}
+
+
