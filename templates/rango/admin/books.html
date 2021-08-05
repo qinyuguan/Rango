@@ -1,7 +1,7 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    Your Orders
+    Manage Books
 {% endblock %}
 {% block body_block %}
     {% block head_block %}
@@ -48,6 +48,8 @@
 
                             </div>
                         {% endfor %}
+                    {% else %}
+                        <div class="nothing">No records</div>
                     {% endif %}
 
                 </div>

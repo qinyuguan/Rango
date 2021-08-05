@@ -1,7 +1,7 @@
 {% extends 'rango/base.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    Your Orders
+    Orders
 {% endblock %}
 {% block body_block %}
     {% block head_block %}
@@ -11,7 +11,7 @@
 
         <div class="data-cont-wrap w1200">
             <div class="product-intro layui-clear" id="intro">
-                <div class="keyword"><h3>Your Orders</h3></div>
+                <div class="keyword"><h3>My Orders</h3></div>
                 <div class="order-list">
                     {% if orders %}
                         {% for order in orders %}
