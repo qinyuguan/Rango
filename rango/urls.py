@@ -14,7 +14,6 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('books/', views.products, name='products'),
     path('books/<slug:book_detail_slug>/', views.product, name='product'),
-    path('books/search/', views.search, name='search'),
 
     path('bought/', views.bought, name='bought'),
     path('profile/', views.profile, name='profile'),

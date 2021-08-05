@@ -170,6 +170,14 @@ def visitor_cookie_handler(request):
 
 
 def products(request):
+    keyword = request.GET.get('keyword')
+    if keyword != None and keyword != "":
+        book_list = set(list(BookDetail.objects.filter(title__contains=keyword)))
+        book_list.union(set(list(BookDetail.objects.filter(author__contains=keyword))))
+        context_dict = {'book_list':book_list , 's_keyword': keyword}
+        print(context_dict)
+        return render(request, 'rango/products.html', context=context_dict)
+
     book_list = BookDetail.objects.order_by('title')[:20]
     context_dict = {'book_list': book_list}
     return render(request, 'rango/products.html', context=context_dict)
@@ -261,7 +269,7 @@ def admin_add_books(request):
         book.save()
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Add made successfully'})
     else:
-        return render(request, 'rango/admin/add_book.html',context={'category_list': Category.objects.all()})
+        return render(request, 'rango/admin/add_book.html', context={'category_list': Category.objects.all()})
 
 
 @admin_required()
@@ -494,28 +502,13 @@ def comment(request, order_no):
         order.isComment = 1
         order.save()
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Comment made successfully'})
-
-
     else:
         try:
             order = Order.objects.get(order_no=order_no)
         except Order.DoesNotExist:
             return redirect('rango:bought')
-
         if order.isComment == 1:
             return redirect('rango:bought')
-
         book = order.book.first()
         context_dict = {'book': book, 'order_no': order_no}
         return render(request, 'rango/comment.html', context=context_dict)
-
-
-def search(request):
-    keyword = request.GET.get('keyword')
-    book_list = set()
-    book_list.add(BookDetail.objects.filter(name__icontains=keyword))
-    book_list.add(BookDetail.objects.filter(author__icontains=keyword))
-    book_list.add(BookDetail.objects.filter(category__icontains=keyword))
-    book_list = list(book_list)
-    context_dict = {'book_list': book_list}
-    return render(request, 'rango/products.html', context=context_dict)

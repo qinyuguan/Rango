@@ -13,9 +13,10 @@
         </div>
         <div class="search">
             <div class="layui-input-inline">
-                <input type="text" placeholder="Search" autocomplete="off" class="box layui-input">
-                <button lay-submit class="btn" type="submit"><img width="20px" height="20px"
-                                                                  src="{% static 'images/search.png' %}"/></button>
+                <input type="text" placeholder="Search" id="keyword" autocomplete="off"
+                       class="box layui-input">
+                <button class="btn" onclick="doSearch()"><img width="20px" height="20px"
+                                                              src="{% static 'images/search.png' %}"/></button>
 
             </div>
         </div>
@@ -34,4 +35,21 @@
     </div>
 
 
+{% endblock %}
+
+
+{% block script_block %}
+    <script>
+        $("#keyword").keydown(function (e) {
+            if (e.keyCode == 13) {
+                var keyword = $('#keyword').val()
+                location.href = "{% url 'rango:products' %}?keyword=" + keyword;
+            }
+        });
+
+        function doSearch() {
+            var keyword = $('#keyword').val()
+            location.href = "{% url 'rango:products' %}?keyword=" + keyword;
+        }
+    </script>
 {% endblock %}

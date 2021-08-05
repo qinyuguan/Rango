@@ -67,6 +67,10 @@
     right: 3px;
 }
 
+.home-search .btn:hover{
+    cursor: pointer;
+}
+
 .search .box{
     border-radius: 20px;
     display: inline-block;
@@ -87,6 +91,11 @@
     top: 2px;
     right: 3px;
 }
+
+.search .btn:hover{
+    cursor: pointer;
+}
+
 
 .trending{
 

@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/font.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 <body>
 
@@ -30,7 +31,7 @@
         <a class="home-item" href="{% url 'rango:categories' %}">Categories</a>
     </div>
     <div style="width: 300px;height: 1px;display: inline-block;"></div>
-    <div class="home-operation" style="z-index: 999">
+    <div class="home-operation">
         <div class="home-user" href="{% url 'rango:bought' %}"><img src="{% static 'images/user.png' %}"/></div>
         <div class="popup-box">
             {% if user.is_authenticated %}
@@ -72,5 +73,7 @@
         </div>
     </div>
 </div>
+{% block script_block %}
+{% endblock %}
 </body>
 </html>
