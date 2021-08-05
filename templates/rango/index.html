@@ -24,9 +24,9 @@
             <div class="trend-list">
                 {% if book_list %}
                     {% for book in book_list %}
-                        <div class="trend-book">
+                        <a href="{% url 'rango:product' book.slug %}" class="trend-book">
                             <img src="{{ book.img }}?width=170&amp;height=255&amp;v=v2">
-                        </div>
+                        </a>
                     {% endfor %}
                 {% endif %}
             </div>
