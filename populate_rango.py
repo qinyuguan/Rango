@@ -149,6 +149,7 @@ if __name__ == '__main__':
             print("error occured when fetch:  ", base_url + index.url)
             print(exc)
 
+    # build the category table
     category_set = set()
     for book in BookDetail.objects.order_by('title'):
         for cate in book.category.split(';'):
@@ -156,3 +157,10 @@ if __name__ == '__main__':
     for cate in category_set:
         category = Category.objects.get_or_create(name=cate)[0]
         category.save()
+
+    # match catrgories
+    for book in BookDetail.objects.order_by('title'):
+        for cate in book.category.split(';'):
+            category = Category.objects.filter(name=cate)[0]
+            book.categories.add(category)
+            book.save()
