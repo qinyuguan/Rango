@@ -8,10 +8,8 @@ from django.template.defaultfilters import slugify
 
 
 class Category(models.Model):
-    NAME_MAX_LENGTH = 128
+    NAME_MAX_LENGTH = 4096
     name = models.CharField(max_length=NAME_MAX_LENGTH, unique=True)
-    views = models.IntegerField(default=0)
-    likes = models.IntegerField(default=0)
     slug = models.SlugField(blank=True, unique=True)
 
     def save(self, *args, **kwargs):
@@ -20,6 +18,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        ordering = ('name',)
 
     def __str__(self):
         return self.name
@@ -61,6 +60,7 @@ class BookDetail(models.Model):
     slug = models.SlugField(blank=True, unique=True)
     desc = models.CharField(max_length=8192, default="")
     category = models.CharField(max_length=8192, default="")
+    categories = models.ManyToManyField(Category)
 
     # TODO- category, reviews, desc
     # category = ""
@@ -74,6 +74,9 @@ class BookDetail(models.Model):
 
     def get_categories(self):
         return self.category.split(";")
+
+    class Meta:
+        ordering = ('title',)
 
 
 class Cart(models.Model):

@@ -137,13 +137,22 @@ if __name__ == '__main__':
             descriptions = html.xpath("//div[@itemprop=\"description\"]")
             if len(descriptions) != 0:
                 descriptions[0].tail = None
-                desc = etree.tostring(descriptions[0], pretty_print=True, method='html', with_tail=False).decode('utf-8').split('<div class="mb-8">')[0]
+                desc = etree.tostring(descriptions[0], pretty_print=True, method='html', with_tail=False).decode(
+                    'utf-8').split('<div class="mb-8">')[0]
             else:
                 desc = ""
             book = BookDetail.objects.get_or_create(title=title, author=author, img=img, publisher=publisher,
                                                     publish_date=publish_date, price=price, language=language,
-                                                    book_type=book_type, ISBN=ISBN, desc=desc,category=categories)[0]
+                                                    book_type=book_type, ISBN=ISBN, desc=desc, category=categories)[0]
             book.save()
         except Exception as exc:
             print("error occured when fetch:  ", base_url + index.url)
             print(exc)
+
+    category_set = set()
+    for book in BookDetail.objects.order_by('title'):
+        for cate in book.category.split(';'):
+            category_set.add(cate)
+    for cate in category_set:
+        category = Category.objects.get_or_create(name=cate)[0]
+        category.save()
