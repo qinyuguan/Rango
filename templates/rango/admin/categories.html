@@ -28,7 +28,8 @@
                 </div>
 
                 <div class="order-list">
-                    <table class="layui-table" style="font-family: 'GT Super Bold', serif;font-size: 20px;" lay-skin="line">
+                    <table class="layui-table" style="font-family: 'GT Super Bold', serif;font-size: 20px;"
+                           lay-skin="line">
                         <colgroup>
                             <col width="500">
                             <col>
@@ -40,13 +41,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>fiction</td>
-                            <td>
-                                <a class="layui-btn layui-btn-sm layui-btn-primary">Edit</a>
-                                <a class="layui-btn layui-btn-sm layui-btn-danger">Delete</a>
-                            </td>
-                        </tr>
+                        {% if category_list %}
+                            {% for category in category_list %}
+                                <tr>
+                                    <td>{{ category.name }}</td>
+                                    <td>
+                                        <a class="layui-btn layui-btn-sm layui-btn-primary">Edit</a>
+                                        <a class="layui-btn layui-btn-sm layui-btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
 
                         </tbody>
                     </table>

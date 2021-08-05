@@ -20,10 +20,10 @@
                 </div>
                 <div class="cate-list">
 
-                    {% if categories %}
-                        {% for category in categories %}
+                    {% if category_list %}
+                        {% for category in category_list %}
                             <div class="cate">
-                                <a href="{% url 'rango:category' 'fiction' %}">{{ category }}</a>
+                                <a href="{% url 'rango:category' category.slug %}">{{ category }}</a>
                             </div>
                         {% endfor %}
                     {% endif %}

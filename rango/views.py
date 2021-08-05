@@ -208,18 +208,19 @@ def users(request):
 
 def category(request, category_name):
     context_dict = {}
-    context_dict['category_name'] = category_name
+    try:
+        category = Category.objects.get(name=category_name)
+    except Category.DoesNotExist:
+        context_dict['category_name'] = category_name
+        return render(request, 'rango/category.html', context=context_dict)
+
+    context_dict['category_name'] = category.name
     return render(request, 'rango/category.html', context=context_dict)
 
 
 def categories(request):
-    # TODO- create new table for category, create slug name
-    ret = set()
-    context_dict = {}
-    querySet = BookDetail.objects.all()
-    for c in querySet:
-        ret = ret.union(set(c.get_categories()))
-    context_dict = {'categories': ret}
+    category_list = list(Category.objects.all()[:20])
+    context_dict = {'category_list': category_list}
     return render(request, 'rango/categories.html', context=context_dict)
 
 @admin_required()
@@ -235,7 +236,23 @@ def admin_books(request):
 
 @admin_required()
 def admin_add_books(request):
-    return render(request, 'rango/admin/add_book.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        desc = request.POST.get('desc')
+        img = request.POST.get('img')
+        # TODO : UPDATE CATEGORY
+        category = request.POST.get('category')
+        book = BookDetail(title=title, author=author, img=img, desc=desc, category=category)
+        book.title = title
+        book.author = author
+        book.desc = desc
+        book.img = img
+        book.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Edit made successfully'})
+    else:
+        return render(request, 'rango/admin/add_book.html')
+
 
 @admin_required()
 def admin_edit_books(request, slug):
@@ -268,10 +285,23 @@ def admin_del_books(request, slug):
 
 @admin_required()
 def admin_categories(request):
-    return render(request, 'rango/admin/categories.html')
+    category_list = list(Category.objects.all()[:20])
+    context_dict = {'category_list':category_list}
+    return render(request, 'rango/admin/categories.html', context=context_dict)
 
 @admin_required()
 def admin_add_categories(request):
+    # TODO: ADD CATEGORIES
+    return render(request, 'rango/admin/add_categories.html')
+
+@admin_required()
+def admin_edit_categories(request):
+    # TODO: EDIT CATEGORY
+    return render(request, 'rango/admin/add_categories.html')
+
+@admin_required()
+def admin_del_categories(request):
+    # TODO: DELETE CATEGORY
     return render(request, 'rango/admin/add_categories.html')
 
 @admin_required()

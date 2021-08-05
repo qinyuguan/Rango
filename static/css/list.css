@@ -112,18 +112,16 @@
 
 .cate{
     width: 200px;
-    height: 50px;
     background-color: #FFFFFF;
     border-radius: 10px;
     margin: 10px;
     text-align: center;
-    font: 20px "GT Super Bold",serif;
+    font: 10px "GT Super Bold",serif;
     font-weight: bolder;
 }
 
 .cate a{
     width: 200px;
-    height: 50px;
     line-height: 50px;
     display: block;
 }

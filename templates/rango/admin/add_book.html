@@ -18,25 +18,25 @@
                 <div class="address-box">
                     <div class="address-item">
                         <div class="address-key">Book Name</div>
-                        <input type="text" class="layui-input address-val" name="name"/>
+                        <input type="text" id="title" class="layui-input address-val" name="name"/>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Author</div>
-                        <input type="text" class="layui-input address-val" name="author"/>
+                        <input type="text" id="author" class="layui-input address-val" name="author"/>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Image Link</div>
-                        <input type="text" class="layui-input address-val" name="img"/>
+                        <input type="text" id="img" class="layui-input address-val" name="img"/>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Category</div>
-                        <select class="layui-select address-val" name="category"/>
+                        <select id="category" class="layui-select address-val" name="category"/>
                             <option>fiction</option>
                         </select>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Description</div>
-                        <textarea class="layui-textarea address-val" name="desc"/></textarea>
+                        <textarea id="desc" class="layui-textarea address-val" name="desc"/></textarea>
                     </div>
                     <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
                          class="layui-btn layui-btn-danger"><i
@@ -48,4 +48,41 @@
         </div>
 
     </div>
+{% endblock %}
+
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
+            window.add = function () {
+                $.ajax({
+                    url: '{% url 'rango:admin_add_books' %}',
+                    type: 'POST',
+                    data: {
+                        'title': $('#title').val(),
+                        'author': $('#author').val(),
+                        'img': $('#img').val(),
+                        'category':$('#category').val(),
+                        'desc':$('#desc').val()
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Add made successfully', {
+                                btn: ['Got it'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:admin_books' %}'
+                            });
+                        }
+                    }
+                })
+            }
+
+
+        });
+    </script>
 {% endblock %}
