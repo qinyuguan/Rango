@@ -187,11 +187,11 @@ def bought(request):
     ret = []
     for order in orders:
         book = order.book.first()
-        temp_dict = {'book':book, 'order':order}
+        temp_dict = {'book': book, 'order': order}
         ret.append(temp_dict)
-    context_dict = {'orders':ret}
+    context_dict = {'orders': ret}
     print(context_dict)
-    return render(request, 'rango/bought.html',context=context_dict)
+    return render(request, 'rango/bought.html', context=context_dict)
 
 
 def profile(request):
@@ -200,53 +200,6 @@ def profile(request):
 
 def users(request):
     return render(request, 'rango/users.html')
-
-
-def cart(request):
-    ret = []
-    total = 0
-    cart = Cart.objects.filter(user=request.user)
-    for c in cart:
-        book = c.book.first()
-        price = round(float(book.price[1:]) * c.num, 2)
-        book.num = c.num
-        book.price = book.price[:1] + str(price)
-        total = round(total + price, 2)
-        ret.append(book)
-    context_dict = {"cart_list": ret, 'total': total}
-    return render(request, 'rango/cart.html', context=context_dict)
-
-
-def comment(request, order_no):
-    if request.method=='POST':
-        content = request.POST.get('comment')
-        try:
-            order = Order.objects.get(order_no=order_no)
-            book = order.book.first()
-        except Order.DoesNotExist:
-            return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Order Invalid'})
-
-        comment = Comment(content=content,date=datetime.now())
-        comment.save()
-        comment.book.add(book)
-        comment.save()
-        order.isComment = 1
-        order.save()
-        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Comment made successfully'})
-
-
-    else:
-        try:
-            order = Order.objects.get(order_no=order_no)
-        except Order.DoesNotExist:
-            return redirect('rango:bought')
-
-        if order.isComment == 1:
-            return redirect('rango:bought')
-
-        book = order.book.first()
-        context_dict = {'book':book, 'order_no':order_no}
-        return render(request, 'rango/comment.html',context=context_dict)
 
 
 def category(request, category_name):
@@ -267,11 +220,47 @@ def categories(request):
 
 
 def admin_books(request):
-    return render(request, 'rango/admin/books.html')
+    keyword = request.GET.get("keyword")
+    if keyword != None and keyword != "":
+        book_list = BookDetail.objects.filter(title__contains=keyword).order_by('title')[:20]
+        context_dict = {'book_list': book_list, 'keyword':keyword}
+        return render(request, 'rango/admin/books.html', context=context_dict)
+    book_list = BookDetail.objects.order_by('title')[:20]
+    context_dict = {'book_list': book_list}
+    return render(request, 'rango/admin/books.html', context=context_dict)
 
 
 def admin_add_books(request):
     return render(request, 'rango/admin/add_book.html')
+
+
+def admin_edit_books(request, slug):
+    if request.method == 'POST':
+        id = request.POST.get('id')
+        title = request.POST.get('title')
+        author = request.POST.get('author')
+        desc = request.POST.get('desc')
+        img = request.POST.get('img')
+        previous_title = request.POST.get('previous_title')
+        # TODO: UPDATE CATEGORY
+        category = request.POST.get('category')
+        book = BookDetail.objects.get(id=id,title=previous_title)
+        book.title = title
+        book.author = author
+        book.desc = desc
+        book.img = img
+        book.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Edit made successfully'})
+    else:
+        book = BookDetail.objects.get(slug=slug)
+        context_dict = {'book': book}
+        return render(request, 'rango/admin/edit_book.html', context=context_dict)
+
+
+def admin_del_books(request,slug):
+    book = BookDetail.objects.get(slug=slug)
+    book.delete()
+    return redirect('rango:admin_books')
 
 
 def admin_categories(request):
@@ -280,6 +269,21 @@ def admin_categories(request):
 
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
+
+
+def cart(request):
+    ret = []
+    total = 0
+    cart = Cart.objects.filter(user=request.user)
+    for c in cart:
+        book = c.book.first()
+        price = round(float(book.price[1:]) * c.num, 2)
+        book.num = c.num
+        book.price = book.price[:1] + str(price)
+        total = round(total + price, 2)
+        ret.append(book)
+    context_dict = {"cart_list": ret, 'total': total}
+    return render(request, 'rango/cart.html', context=context_dict)
 
 
 def cart_add(request):
@@ -363,3 +367,41 @@ def cart_pay(request):
             cart.delete()
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Book was added to your basket'})
     return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Method not support'})
+
+
+def comment(request, order_no):
+    if request.method == 'POST':
+        content = request.POST.get('comment')
+        try:
+            order = Order.objects.get(order_no=order_no)
+            book = order.book.first()
+        except Order.DoesNotExist:
+            return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Order Invalid'})
+
+        comment = Comment(content=content, date=datetime.now())
+        comment.save()
+        comment.book.add(book)
+        comment.save()
+        order.isComment = 1
+        order.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Comment made successfully'})
+
+
+    else:
+        try:
+            order = Order.objects.get(order_no=order_no)
+        except Order.DoesNotExist:
+            return redirect('rango:bought')
+
+        if order.isComment == 1:
+            return redirect('rango:bought')
+
+        book = order.book.first()
+        context_dict = {'book': book, 'order_no': order_no}
+        return render(request, 'rango/comment.html', context=context_dict)
+
+def search(request):
+    keyword = request.GET.get('keyword')
+    book_list = BookDetail.objects.filter()
+    context_dict = {'book_list': book_list}
+    return render(request, 'rango/products.html', context=context_dict)

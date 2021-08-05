@@ -7,26 +7,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
 {% endblock %}
 
-{% block script_block %}
-    <script>
-        function addToCart(){
-            $.ajax({
-                url: '{% url 'rango:cart_add' %}',
-                type: 'POST',
-                data:{
-                    'slug': '{{ book.slug }}'
-                },
-                success:function (ret){
-                    console.log(ret)
-                    if (ret.code==200){
-                        alert(ret.msg)
-                    }
-                }
-            });
-        }
-    </script>
-{% endblock %}
-
 {% block body_block %}
     <div class="content content-nav-base datails-content">
 
@@ -58,7 +38,7 @@
                         </div>
                         <div class="operation">
                             <a onclick="addToCart()" class="layui-btn layui-btn-danger"
-                                 style="border-radius: 15px;background-color: #DE2454;"><i
+                               style="border-radius: 15px;background-color: #DE2454;"><i
                                     class="layui-icon layui-icon-cart-simple"></i>ADD TO BASKET
                             </a>
                             <div class="layui-btn layui-btn-primary" style="border-radius: 15px;"><i
@@ -138,3 +118,35 @@
         </div>
     </div>
 {% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            window.addToCart = function () {
+                $.ajax({
+                    url: '{% url 'rango:cart_add' %}',
+                    type: 'POST',
+                    data: {
+                        'slug': '{{ book.slug }}'
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Book was added to your basket, do you want to check?', {
+                                btn: ['Yes', 'No'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:cart' %}'
+                            }, function (index) {
+                                layer.close(index)
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}
+
