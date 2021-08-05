@@ -209,12 +209,14 @@ def users(request):
 def category(request, category_name):
     context_dict = {}
     try:
-        category = Category.objects.get(name=category_name)
+        category = Category.objects.get(slug=category_name)
+        book_list = BookDetail.objects.filter(categories__name__contains=category)
+        context_dict['book_list'] = book_list
     except Category.DoesNotExist:
         context_dict['category_name'] = category_name
         return render(request, 'rango/category.html', context=context_dict)
 
-    context_dict['category_name'] = category.name
+    context_dict['category_name'] = category_name
     return render(request, 'rango/category.html', context=context_dict)
 
 
