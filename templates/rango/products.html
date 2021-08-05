@@ -63,6 +63,7 @@
 
 
                 </div>
+                <div class="pagebox"><a onclick="more()"></a></div>
             </div>
         </div>
 
@@ -103,6 +104,22 @@
                             }, function (index, layero) {
                                 layer.close(index)
                             });
+                        }
+                    }
+                });
+            }
+
+            window.more = function (slug) {
+                $.ajax({
+                    url: '{% url 'rango:more' %}',
+                    type: 'GET',
+                    data: {
+                        'page': ({{ page }}+1),
+                        'keyword': '{{ s_keyword }}'
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            console.log(ret.book_list)
                         }
                     }
                 });

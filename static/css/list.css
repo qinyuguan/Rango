@@ -130,3 +130,13 @@
     background-color: #e6e3e8;
     cursor: pointer;
 }
+
+.pagebox{
+    margin-top: 25px;
+    font-family: "GT Super Bold";
+    font-size: 20px;
+}
+
+.pagebox:hover{
+    cursor: pointer;
+}
