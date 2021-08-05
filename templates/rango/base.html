@@ -42,10 +42,21 @@
     <div class="home-operation" style="z-index: 999">
         <div class="home-user"><img src="{% static 'images/user.png' %}"/></div>
         <div class="popup-box">
-            <div class="popup-item"><a href="{% url 'rango:login' %}">Login</a></div>
-            <div class="popup-item"><a href="{% url 'rango:register' %}">Sign Up</a></div>
-            <div class="popup-item"><a href="{% url 'rango:bought' %}">My Orders</a></div>
-            <div class="popup-item"><a>Logout</a></div>
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <div class="popup-item"><a href="{% url 'rango:admin_orders' %}">Orders</a></div>
+                    <div class="popup-item"><a href="{% url 'rango:admin_books' %}">Books</a></div>
+                    <div class="popup-item"><a href="{% url 'rango:admin_categories' %}">Categories</a></div>
+                {% else %}
+                    <div class="popup-item"><a href="{% url 'rango:bought' %}">My Orders</a></div>
+                {% endif %}
+                <div class="popup-item"><a>Logout</a></div>
+            {% else %}
+                <div class="popup-item"><a href="{% url 'rango:login' %}">Login</a></div>
+                <div class="popup-item"><a href="{% url 'rango:register' %}">Sign Up</a></div>
+            {% endif %}
+
+
         </div>
     </div>
 
