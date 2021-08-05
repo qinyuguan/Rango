@@ -441,3 +441,14 @@ def comment(request, order_no):
         book = order.book.first()
         context_dict = {'book': book, 'order_no': order_no}
         return render(request, 'rango/comment.html', context=context_dict)
+
+
+def search(request):
+    keyword = request.GET.get('keyword')
+    book_list = set()
+    book_list.add(BookDetail.objects.filter(name__icontains=keyword))
+    book_list.add(BookDetail.objects.filter(author__icontains=keyword))
+    book_list.add(BookDetail.objects.filter(category__icontains=keyword))
+    book_list = list(book_list)
+    context_dict = {'book_list': book_list}
+    return render(request, 'rango/products.html', context=context_dict)
