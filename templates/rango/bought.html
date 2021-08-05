@@ -76,8 +76,11 @@
                                         </a>
                                     </div>
                                     <div class="order-operation">
-                                        <a href="{% url 'rango:comment' %}" class="layui-btn layui-btn-primary">Write a
-                                            product review</a>
+                                        {% if order.order.isComment == 0 %}
+                                            <a href="{% url 'rango:comment' order.order.order_no %}" class="layui-btn layui-btn-primary">Write a product review</a>
+                                        {% else %}
+                                            <a href="#" class="layui-btn layui-btn-primary" style="cursor: not-allowed;" ><i class="layui-icon layui-icon-ok"></i>Comment Finished</a>
+                                        {% endif %}
                                         <a onclick="returnItem()"
                                            class="layui-btn layui-btn-primary">Return items</a>
                                     </div>

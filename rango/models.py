@@ -95,6 +95,13 @@ class Order(models.Model):
     phone = models.CharField(max_length=255)
     status = models.IntegerField(default=0)
     date = models.DateTimeField()
+    isComment = models.IntegerField(default=0)
     order_no = ShortUUIDField(primary_key=False, default=uuid1, editable=False)
+
+
+class Comment(models.Model):
+    content = models.TextField(default="")
+    date = models.DateTimeField()
+    book = models.ManyToManyField(BookDetail)
 
 

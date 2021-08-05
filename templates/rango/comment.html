@@ -17,33 +17,66 @@
 
                         <div class="order-detail">
                             <div class="order-detail-img">
-                                <a>
-                                    <img src="{% static 'images/pan.png' %}"/>
+                                <a href="{% url 'rango:product' book.slug %}">
+                                    <img src="{{ book.img }}"/>
                                 </a>
                             </div>
                             <div class="order-detail-title">
-                                <a>
-                                    ferlord Non Stick Frying Pan 24cm, Induction Hob Frying Pan, Nonstick Coating Saute
-                                    Pan, Omelette Skillet, Also for Oil-and Fat-Free Frying Pan
+                                <a href="{% url 'rango:product' book.slug %}">
+                                    {{ book.title }}
                                 </a>
                             </div>
                         </div>
 
                     </div>
+
                     <div class="comment-box">
                         <div class="comment-item">
                             <div class="comment-key">Comment</div>
-                            <textarea type="text" class="layui-textarea comment-val" name="comment"></textarea>
+                            <textarea type="text" id="comment" class="layui-textarea comment-val" name="comment"></textarea>
                         </div>
-                        <div style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
-                             class="layui-btn layui-btn-danger"><i
+                        <button onclick="doComment()" style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
+                                class="layui-btn layui-btn-danger"><i
                                 class="layui-icon layui-icon-edit"></i>
                             SUBMIT
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
+{% endblock %}
+
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+
+            window.doComment = function () {
+                $.ajax({
+                    url: '{% url 'rango:comment' order_no %}',
+                    type: 'POST',
+                    data: {
+                        'comment': $('#comment').val()
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            layer.confirm('Comment made successfully', {
+                                btn: ['Yes'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                location.href = '{% url 'rango:bought' %}'
+                            });
+                        }
+                    }
+                })
+            }
+
+
+        });
+    </script>
 {% endblock %}

@@ -9,6 +9,7 @@ from rango.models import Page
 from rango.models import BookDetail
 from rango.models import Cart
 from rango.models import Order
+from rango.models import Comment
 from rango.forms import CategoryForm, PageForm
 from rango.forms import UserForm, UserProfileForm
 from django.http import JsonResponse
@@ -216,8 +217,36 @@ def cart(request):
     return render(request, 'rango/cart.html', context=context_dict)
 
 
-def comment(request):
-    return render(request, 'rango/comment.html')
+def comment(request, order_no):
+    if request.method=='POST':
+        content = request.POST.get('comment')
+        try:
+            order = Order.objects.get(order_no=order_no)
+            book = order.book.first()
+        except Order.DoesNotExist:
+            return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Order Invalid'})
+
+        comment = Comment(content=content,date=datetime.now())
+        comment.save()
+        comment.book.add(book)
+        comment.save()
+        order.isComment = 1
+        order.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Comment made successfully'})
+
+
+    else:
+        try:
+            order = Order.objects.get(order_no=order_no)
+        except Order.DoesNotExist:
+            return redirect('rango:bought')
+
+        if order.isComment == 1:
+            return redirect('rango:bought')
+
+        book = order.book.first()
+        context_dict = {'book':book, 'order_no':order_no}
+        return render(request, 'rango/comment.html',context=context_dict)
 
 
 def category(request, category_name):
