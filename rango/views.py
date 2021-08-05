@@ -183,7 +183,7 @@ def product(request, book_detail_slug):
 
 def bought(request):
     user = request.user
-    orders = Order.objects.filter(user=user)
+    orders = Order.objects.filter(user=user).order_by("-date")
     ret = []
     for order in orders:
         book = order.book.first()
