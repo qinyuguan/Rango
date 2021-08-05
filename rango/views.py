@@ -248,17 +248,20 @@ def admin_add_books(request):
         author = request.POST.get('author')
         desc = request.POST.get('desc')
         img = request.POST.get('img')
-        # TODO : UPDATE CATEGORY
-        category = request.POST.get('category')
-        book = BookDetail(title=title, author=author, img=img, desc=desc, category=category)
+        category_id = request.POST.get('category')
+        categories = Category.objects.get(id=category_id)
+
+        book = BookDetail(title=title, author=author, img=img, desc=desc, category=categories.name)
         book.title = title
         book.author = author
         book.desc = desc
         book.img = img
         book.save()
+        book.category.add(categories)
+        book.save()
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Add made successfully'})
     else:
-        return render(request, 'rango/admin/add_book.html')
+        return render(request, 'rango/admin/add_book.html',context={'category_list': Category.objects.all()})
 
 
 @admin_required()
@@ -281,7 +284,8 @@ def admin_edit_books(request, slug):
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Edit made successfully'})
     else:
         book = BookDetail.objects.get(slug=slug)
-        context_dict = {'book': book}
+        current_category = book.categories.first().id
+        context_dict = {'book': book, 'category_list': Category.objects.all(), 'current_category': current_category}
         return render(request, 'rango/admin/edit_book.html', context=context_dict)
 
 
@@ -312,7 +316,7 @@ def admin_add_categories(request):
         category.save()
         return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Add made successfully'})
     else:
-        return render(request, 'rango/admin/add_categories.html')
+        return render(request, 'rango/admin/add_category.html')
 
 
 @admin_required()

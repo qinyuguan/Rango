@@ -14,15 +14,17 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Edit Book</h3></div>
                 <hr/>
-{#                <div class="sub-keyword">Book Name</div>#}
+                {#                <div class="sub-keyword">Book Name</div>#}
                 <div class="address-box">
                     <div class="address-item">
                         <div class="address-key">Book Name</div>
-                        <input type="text" id="title" class="layui-input address-val" name="title" value="{{ book.title }}"/>
+                        <input type="text" id="title" class="layui-input address-val" name="title"
+                               value="{{ book.title }}"/>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Author</div>
-                        <input type="text" id="author" class="layui-input address-val" name="author" value="{{ book.author }}"/>
+                        <input type="text" id="author" class="layui-input address-val" name="author"
+                               value="{{ book.author }}"/>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Image Link</div>
@@ -31,14 +33,26 @@
                     <div class="address-item">
                         <div class="address-key">Category</div>
                         <select class="layui-select address-val" name="category" id="category"/>
-                            <option>fiction</option>
+                        {% if category_list %}
+                            {% for category in category_list %}
+                                {% if current_category == category.id %}
+                                    <option value="{{ category.id }}" selected="selected">{{ category.name }}</option>
+                                {% else %}
+                                    <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endif %}
+
+                            {% endfor %}
+                        {% else %}
+                            <option>No Option</option>
+                        {% endif %}
                         </select>
                     </div>
                     <div class="address-item">
                         <div class="address-key">Description</div>
                         <textarea id="desc" class="layui-textarea address-val" name="desc">{{ book.desc }}</textarea>
                     </div>
-                    <div onclick="edit()" style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
+                    <div onclick="edit()"
+                         style="background-color: #DE2454;border-radius: 20px;font-family: 'GT Super Bold', serif"
                          class="layui-btn layui-btn-danger"><i
                             class="layui-icon layui-icon-edit"></i>
                         SAVE
@@ -66,8 +80,8 @@
                         'title': $('#title').val(),
                         'author': $('#author').val(),
                         'img': $('#img').val(),
-                        'category':$('#category').val(),
-                        'desc':$('#desc').val(),
+                        'category': $('#category').val(),
+                        'desc': $('#desc').val(),
                         "id":{{ book.id }}
                     },
                     success: function (ret) {

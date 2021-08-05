@@ -14,7 +14,7 @@
             <div class="product-intro layui-clear" id="intro">
                 <div class="keyword"><h3>Add Book</h3></div>
                 <hr/>
-{#                <div class="sub-keyword">Book Name</div>#}
+                {#                <div class="sub-keyword">Book Name</div>#}
                 <div class="address-box">
                     <div class="address-item">
                         <div class="address-key">Book Name</div>
@@ -31,7 +31,13 @@
                     <div class="address-item">
                         <div class="address-key">Category</div>
                         <select id="category" class="layui-select address-val" name="category"/>
-                            <option>fiction</option>
+                        {% if category_list %}
+                            {% for category in category_list %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        {% else %}
+                            <option>No Option</option>
+                        {% endif %}
                         </select>
                     </div>
                     <div class="address-item">
@@ -64,8 +70,8 @@
                         'title': $('#title').val(),
                         'author': $('#author').val(),
                         'img': $('#img').val(),
-                        'category':$('#category').val(),
-                        'desc':$('#desc').val()
+                        'category': $('#category').val(),
+                        'desc': $('#desc').val()
                     },
                     success: function (ret) {
                         if (ret.code == 200) {
