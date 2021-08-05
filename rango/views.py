@@ -122,6 +122,9 @@ def register(request):
 
 
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('rango:index')
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -269,6 +272,38 @@ def admin_categories(request):
 
 def admin_add_categories(request):
     return render(request, 'rango/admin/add_categories.html')
+
+
+def admin_orders(request):
+    keyword = request.GET.get("keyword")
+    # if keyword != None and keyword != "":
+    #     order_list = Order.objects.filter().order_by('-date')[:20]
+    #     context_dict = {'book_list': book_list, 'keyword':keyword}
+    #     return render(request, 'rango/admin/books.html', context=context_dict)
+    ret = []
+    order_list = Order.objects.order_by('-date')[:20]
+    for order in order_list:
+        user = order.user.first()
+        book = order.book.first()
+        temp_dict = {'book': book, 'user': user, 'order':order}
+        ret.append(temp_dict)
+    context_dict = {'orders': ret}
+    return render(request, 'rango/admin/orders.html', context=context_dict)
+
+def admin_orders_status(request):
+    if request.method == 'POST':
+        status = request.POST.get('code')
+        order_no = request.POST.get('order_no')
+        try:
+            order = Order.objects.get(order_no=order_no)
+        except Order.DoesNotExist:
+            return JsonResponse({'code': 500, 'status': 'failed', 'msg': 'Order invalid'})
+
+        order.status = status
+        order.save()
+        return JsonResponse({'code': 200, 'status': 'success', 'msg': 'Status set successfully'})
+
+
 
 
 def cart(request):
