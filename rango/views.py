@@ -223,7 +223,7 @@ def admin_books(request):
     keyword = request.GET.get("keyword")
     if keyword != None and keyword != "":
         book_list = BookDetail.objects.filter(title__contains=keyword).order_by('title')[:20]
-        context_dict = {'book_list': book_list, 'keyword':keyword}
+        context_dict = {'book_list': book_list, 'keyword': keyword}
         return render(request, 'rango/admin/books.html', context=context_dict)
     book_list = BookDetail.objects.order_by('title')[:20]
     context_dict = {'book_list': book_list}
@@ -244,7 +244,7 @@ def admin_edit_books(request, slug):
         previous_title = request.POST.get('previous_title')
         # TODO: UPDATE CATEGORY
         category = request.POST.get('category')
-        book = BookDetail.objects.get(id=id,title=previous_title)
+        book = BookDetail.objects.get(id=id, title=previous_title)
         book.title = title
         book.author = author
         book.desc = desc
@@ -257,7 +257,7 @@ def admin_edit_books(request, slug):
         return render(request, 'rango/admin/edit_book.html', context=context_dict)
 
 
-def admin_del_books(request,slug):
+def admin_del_books(request, slug):
     book = BookDetail.objects.get(slug=slug)
     book.delete()
     return redirect('rango:admin_books')
@@ -333,7 +333,7 @@ def cart_confirm(request):
         price = round(float(book.price[1:]), 2)
         total = round(float(num * price), 2)
         all_total += total
-        all_total = round(all_total,2)
+        all_total = round(all_total, 2)
         price = book.price[:1] + str(price)
         total = book.price[:1] + str(total)
         temp = {'book': book, 'num': num, 'price': price, 'total': total}
@@ -401,8 +401,13 @@ def comment(request, order_no):
         context_dict = {'book': book, 'order_no': order_no}
         return render(request, 'rango/comment.html', context=context_dict)
 
+
 def search(request):
     keyword = request.GET.get('keyword')
-    book_list = BookDetail.objects.filter()
+    book_list = set()
+    book_list.add(BookDetail.objects.filter(name__icontains=keyword))
+    book_list.add(BookDetail.objects.filter(author__icontains=keyword))
+    book_list.add(BookDetail.objects.filter(category__icontains=keyword))
+    book_list = list(book_list)
     context_dict = {'book_list': book_list}
     return render(request, 'rango/products.html', context=context_dict)
