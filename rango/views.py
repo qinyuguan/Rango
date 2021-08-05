@@ -333,6 +333,7 @@ def cart_confirm(request):
         price = round(float(book.price[1:]), 2)
         total = round(float(num * price), 2)
         all_total += total
+        all_total = round(all_total,2)
         price = book.price[:1] + str(price)
         total = book.price[:1] + str(total)
         temp = {'book': book, 'num': num, 'price': price, 'total': total}
