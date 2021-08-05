@@ -33,9 +33,13 @@
     </div>
     <div class="home-search">
         <div class="layui-input-inline">
-            <input type="text" placeholder="Search" id="nav_search" value="{{ s_keyword }}" autocomplete="off" class="box layui-input">
-            <div><button onclick="doNavSearch()" class="btn" type="submit"><img width="20px" height="20px"
-                                                              src="{% static 'images/search.png' %}"/></button></div>
+            <input type="text" placeholder="Search" id="nav_search" value="{{ s_keyword }}" autocomplete="off"
+                   class="box layui-input">
+            <div>
+                <button onclick="doNavSearch()" class="btn" type="submit"><img width="20px" height="20px"
+                                                                               src="{% static 'images/search.png' %}"/>
+                </button>
+            </div>
         </div>
     </div>
     <div class="home-operation">
@@ -89,8 +93,14 @@
     $.ajaxSetup({
         data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
     })
+    $("#nav_search").keydown(function (e) {
+        if (e.keyCode == 13) {
+            var keyword = $('#nav_search').val()
+            location.href = "{% url 'rango:products' %}?keyword=" + keyword;
+        }
+    });
 
-    function doNavSearch(){
+    function doNavSearch() {
         var keyword = $('#nav_search').val()
         location.href = "{% url 'rango:products' %}?keyword=" + keyword;
     }
