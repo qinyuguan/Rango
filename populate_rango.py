@@ -6,13 +6,15 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tango_with_django_project.setti
 import django
 
 django.setup()
-from rango.models import Category, Page, BookDetail
+from rango.models import Category, BookDetail
 import json
 
 import requests
 from lxml import etree
 
 
+# data class
+# To save index info
 class ProductIndex:
     title = ""
     url = ""
@@ -23,6 +25,9 @@ class ProductIndex:
 
 
 def download_html():
+    print("Trying to fetch data from the internet.")
+    print("If you encounter any trouble in this step, you can unzip the downloaded.zip directly.")
+
     main_page_url = 'https://uk.bookshop.org/books?page='
     base_url = 'https://uk.bookshop.org/'
     all_product_indies = []
@@ -53,20 +58,22 @@ if __name__ == '__main__':
     print('Starting Rango population script...')
     file_folder = "./downloaded/"
     # if the html folder doesn't exist, the script will download it.
-    if os.path.exists(file_folder):
+    if not os.path.exists(file_folder):
+        print('downloaded folder doesn\'t exist.')
         os.mkdir(file_folder)
         download_html()
 
     base_url = 'https://uk.bookshop.org/'
 
     # only add 500 files into our database
+    count = 0
     for file in os.listdir(file_folder)[:1000]:
         with open(file_folder + file, 'r') as f:
             try:
                 # extract information from html files
                 html = etree.HTML(f.read())
                 title = html.xpath("//*[@id='content']/div[2]/div[2]/div[1]/h1")[0].text
-                author = html.xpath("//*[@itemprop='author']//*[@itemprop='name']")[0].text
+                author = html.xpath("//*[@itemprop='author']//*[@itemprop='name']")[0].text.strip()
                 img = html.xpath("//*[@id='content']/div[2]/div[2]/div[2]/div/a/img")[0].attrib['src'].split('?')[0]
                 price = html.xpath("//div[@itemprop='offers']/b")[0].text
                 publisher = html.xpath("//div[@itemprop=\"publisher\"]")[0].text
@@ -92,18 +99,20 @@ if __name__ == '__main__':
                                                         publish_date=publish_date, price=price, language=language,
                                                         book_type=book_type, ISBN=ISBN, desc=desc, category=categories)[
                     0]
-
+                count += 1
                 book.save()
             except Exception as exc:
-                print("error occured when fetch:  ", file)
+                print("error occurred during processing:  ", file)
                 print(exc)
 
     # build the category table
     category_set = set()
+    category_count = 0
     for book in BookDetail.objects.order_by('title'):
         for cate in book.category.split(';'):
             category_set.add(cate)
     for cate in category_set:
+        category_count += 1
         try:
             category = Category.objects.get_or_create(name=cate)[0]
             category.save()
@@ -119,3 +128,5 @@ if __name__ == '__main__':
                 book.save()
             except:
                 pass
+
+    print('Added ' + str(count) + ' books in ' + str(category_count) + ' categories to database Successfully')
