@@ -112,6 +112,19 @@
                     content: 'Please Contract Customer Service'
                 });
             }
+
+            {% if err_msg %}
+                layer.confirm('{{err_msg}}', {
+                    btn: ['Got it'],
+                    title: 'Information',
+                    closeBtn: 1,
+                    shadeClose: true,
+                }, function (index, layero) {
+                    layer.close(index)
+                });
+            {% endif %}
+
+
         });
     </script>
 {% endblock %}
