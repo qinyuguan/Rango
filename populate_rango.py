@@ -8,7 +8,7 @@ import django
 django.setup()
 from rango.models import Category, BookDetail
 import json
-
+import zipfile
 import requests
 from lxml import etree
 
@@ -63,7 +63,13 @@ if __name__ == '__main__':
     if not os.path.exists(file_folder):
         print('downloaded folder doesn\'t exist.')
         os.mkdir(file_folder)
-        download_html(NUMBER_OF_PAGES)
+        zip_file = zipfile.ZipFile("./downloaded.zip")
+        zip_list = zip_file.namelist()
+        for f in zip_list:
+            zip_file.extract(f, file_folder)
+        zip_file.close()
+        # download_html(NUMBER_OF_PAGES)
+
 
     base_url = 'https://uk.bookshop.org/'
 
