@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_protect
+
 from rango.models import Category
 from rango.models import Page
 from rango.models import BookDetail
@@ -92,7 +94,7 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
-
+@csrf_protect
 def register(request):
     registered = False
     if request.method == 'POST':
