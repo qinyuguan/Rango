@@ -465,6 +465,9 @@ def comment(request, order_no):
             return redirect('rango:bought')
         if order.isComment == 1:
             return redirect('rango:bought')
+        if order.status==0:
+            return render(request, 'rango/bought.html', context={'err_msg':'The order is in pending status, you cannot make comment now.'})
+
         book = order.book.first()
         context_dict = {'book': book, 'order_no': order_no}
         return render(request, 'rango/comment.html', context=context_dict)
