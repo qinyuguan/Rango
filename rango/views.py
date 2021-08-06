@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -162,18 +163,6 @@ def products(request):
     return render(request, 'rango/products.html', context=context_dict)
 
 
-def products_more(request):
-    page = request.GET.get("page")
-    keyword = request.GET.get("keyword")
-    if page is None:
-        page = 1
-    if keyword is None:
-        keyword = ''
-    start = (page - 1) * 20
-    end = page * 20
-    book_list = list(BookDetail.objects.filter(title__contains=keyword).order_by('title')[start:end])
-    context_dict = {'code': 200, 'book_list': book_list, 'page': page}
-    return JsonResponse(context_dict)
 
 
 
