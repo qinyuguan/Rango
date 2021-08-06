@@ -10,6 +10,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='logout'),
     path('changePassword/', views.change_password, name="change_password"),
     path('books/', views.products, name='products'),
+    path('like/', views.like, name='like'),
     path('books/<slug:book_detail_slug>/', views.product, name='product'),
 
     path('bought/', views.bought, name='bought'),

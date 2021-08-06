@@ -26,9 +26,13 @@
                     <div style="float: left;width: 5%;height: 1px"></div>
                     <div class="content">
                         <div class="b_title"><h1>{{ book.title }}</h1></div>
-                        <div class="rate">1200+ likes</div>
+                        <div class="rate">{{ likes }} likes</div>
                         <div class="author"><h3><span>{{ book.author }}</span> (Author)</h3></div>
-                        <div class="category">Modern & contemporary fiction</div>
+                        {% for genre in  book.categories.all %}
+                            <div class="category"><a href="/rango/category/{{ genre.slug }}">{{ genre }}</a></div>
+
+                        {% endfor %}
+
                         <div class="format" style="margin-bottom: 20px">
                             <div class="item">
                                 <div class="type">{{ book.book_type }}</div>
@@ -41,11 +45,16 @@
                                style="border-radius: 15px;background-color: #DE2454;"><i
                                     class="layui-icon layui-icon-cart-simple"></i>ADD TO BASKET
                             </a>
-                            <div class="layui-btn layui-btn-primary" style="border-radius: 15px;"><i
-                                    class="layui-icon layui-icon-camera"></i>ADD TO WISHLIST
-                            </div>
+                            {% if like_flag is True %}
+                                <a onclick="like('0')" class="layui-btn layui-btn-primary" style="border-radius: 15px;background-color: darkolivegreen;color: #f6f5f7"><i
+                                        class="layui-icon layui-icon-flag"></i>UNLIKE
+                                </a>
+                            {% else %}
+                                <a onclick="like('1')" class="layui-btn layui-btn-primary" style="border-radius: 15px;background-color: #1E9FFF;color: #f6f5f7"><i
+                                        class="layui-icon layui-icon-flag"></i>LIKE
+                                </a>
+                            {% endif %}
                         </div>
-                        {#                        {{ book.desc }}#}
                         <div class="desc">
                             <h1>Description</h1>
                             <hr/>
@@ -100,14 +109,6 @@
                                     <div class="detail-val">{{ book.ISBN }}</div>
                                 </div>
 
-                                <div class="BIC Category">
-                                    <h6 class="product-section-title">BIC Categories:</h6>
-                                    <div class="comma-after-except-last hover:underline mr-1">
-                                        {% for genre in  book.get_categories %}
-                                            <a itemprop="genre" href="/rango/category/{{ genre }}">{{ genre }}</a>
-                                        {% endfor %}
-                                    </div>
-                                </div>
                             </div>
                         </div>
 
@@ -143,7 +144,7 @@
                             }, function (index) {
                                 layer.close(index)
                             });
-                        }else if (ret.code==500){
+                        } else if (ret.code == 500) {
                             layer.confirm(ret.msg, {
                                 icon: 2,
                                 btn: ['Got it'],
@@ -157,6 +158,33 @@
                     }
                 });
             }
+
+            window.like = function (flag) {
+                $.ajax({
+                    url: '{% url 'rango:like' %}',
+                    type: 'POST',
+                    data: {
+                        'flag': flag,
+                        'id': '{{ book.id }}'
+                    },
+                    success: function (ret) {
+                        if (ret.code == 200) {
+                            location.reload()
+                        } else if (ret.code == 500) {
+                            layer.confirm(ret.msg, {
+                                icon: 2,
+                                btn: ['Got it'],
+                                title: 'Information',
+                                closeBtn: 1,
+                                shadeClose: true,
+                            }, function (index, layero) {
+                                layer.close(index)
+                            });
+                        }
+                    }
+                });
+            }
+
         });
     </script>
 {% endblock %}

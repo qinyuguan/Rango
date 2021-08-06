@@ -66,6 +66,10 @@ class BookDetail(models.Model):
         ordering = ('title',)
 
 
+class Like(models.Model):
+    book = models.OneToOneField(BookDetail, on_delete=models.CASCADE)
+    user = models.ManyToManyField(User)
+
 class Cart(models.Model):
     user = models.ManyToManyField(User)
     book = models.ManyToManyField(BookDetail)

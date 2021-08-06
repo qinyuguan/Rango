@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
 
-from rango.models import Category
+from rango.models import Category, Like
 from rango.models import BookDetail
 from rango.models import Cart
 from rango.models import Order
@@ -115,14 +115,35 @@ def products(request):
     return render(request, 'rango/products.html', context=context_dict)
 
 
-
-
+@user_required(ajax=True)
+def like(request):
+    if request.method == 'POST':
+        book_id = request.POST.get("id")
+        book = BookDetail.objects.get(id=book_id)
+        flag = request.POST.get("flag")
+        user = request.user
+        like = Like.objects.get(book=book)
+        if flag == '1':
+            like.user.add(user)
+            like.save()
+        else:
+            like.user.remove(user)
+            like.save()
+        return JsonResponse({'code':200,'status':'success','msg':'Success'})
+    return JsonResponse({'code':500,'status':'failed','msg':'Method Invalid'})
 
 def product(request, book_detail_slug):
     context_dict = {}
     try:
         book = BookDetail.objects.get(slug=book_detail_slug)
+        like = Like.objects.get_or_create(book=book)[0]
+        context_dict['likes'] = len(list(like.user.all()))
         context_dict['book'] = book
+        likes_user_list = list(like.user.all())
+        if request.user in likes_user_list:
+            context_dict['like_flag'] = True
+        else:
+            context_dict['like_flag'] = False
         return render(request, 'rango/product.html', context=context_dict)
     except BookDetail.DoesNotExist:
         return redirect('rango:index')
