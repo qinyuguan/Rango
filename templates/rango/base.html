@@ -52,6 +52,7 @@
                     <div class="popup-item"><a href="{% url 'rango:admin_categories' %}">Categories</a></div>
                 {% else %}
                     <div class="popup-item"><a href="{% url 'rango:bought' %}">My Orders</a></div>
+                    <div class="popup-item"><a href="{% url 'rango:profile' %}">Profile</a></div>
                 {% endif %}
                 <div class="popup-item"><a href="{% url 'rango:logout' %}">Logout</a></div>
             {% else %}

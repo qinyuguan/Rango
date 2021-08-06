@@ -1,5 +1,5 @@
 from django.contrib import admin
-from rango.models import Category, Page, UserProfile,BookDetail, Cart
+from rango.models import Category, UserProfile,BookDetail, Cart
 
 
 
@@ -8,11 +8,7 @@ from rango.models import Category, Page, UserProfile,BookDetail, Cart
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
 
-class PageAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'url')
-
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Page, PageAdmin)
 admin.site.register(UserProfile)
 admin.site.register(BookDetail)
 admin.site.register(Cart)

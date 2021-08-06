@@ -32,7 +32,7 @@
                     <div class="login-item">
                         <div class="login-label">Password Confirmation</div>
                         <div>
-                            <input class="login-input layui-input" name="password_repeat" autocomplete="off"
+                            <input class="login-input layui-input" name="password_confirm" autocomplete="off"
                                    type="password"/>
                         </div>
                     </div>
@@ -48,4 +48,32 @@
             </form>
         </div>
     </div>
+{% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            {% if err_msg %}
+                layer.confirm('{{err_msg}}', {
+                    btn: ['Got it'],
+                    title: 'Information',
+                    closeBtn: 1,
+                    shadeClose: true,
+                }, function (index, layero) {
+                    layer.close(index)
+                });
+            {% endif %}
+            {% if success_msg %}
+                layer.confirm('{{success_msg}}', {
+                    btn: ['Got it'],
+                    title: 'Information',
+                    closeBtn: 1,
+                    shadeClose: true,
+                }, function (index, layero) {
+                    layer.close(index)
+                });
+            {% endif %}
+        });
+    </script>
 {% endblock %}

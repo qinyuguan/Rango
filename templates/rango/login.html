@@ -42,3 +42,21 @@
         </div>
     </div>
 {% endblock %}
+
+{% block script_block %}
+    <script>
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            {% if err_msg %}
+                layer.confirm('{{err_msg}}', {
+                    btn: ['Got it'],
+                    title: 'Information',
+                    closeBtn: 1,
+                    shadeClose: true,
+                }, function (index, layero) {
+                    layer.close(index)
+                });
+            {% endif %}
+        });
+    </script>
+{% endblock %}

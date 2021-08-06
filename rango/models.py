@@ -23,19 +23,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-class Page(models.Model):
-    TITLE_MAX_LENGTH = 128
-    URL_MAX_LENGTH = 200
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=TITLE_MAX_LENGTH)
-    url = models.URLField(max_length=URL_MAX_LENGTH)
-    views = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.title
-
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
