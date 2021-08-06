@@ -55,7 +55,7 @@ def download_html(NUMBER_OF_PAGES):
 
 
 if __name__ == '__main__':
-    NUMBER_OF_HTML_FILES_WANT_TO_ADD = 200
+    # NUMBER_OF_HTML_FILES_WANT_TO_ADD = 200
     NUMBER_OF_PAGES = 20
     print('Starting Rango population script...')
     file_folder = "./downloaded/"
@@ -69,9 +69,9 @@ if __name__ == '__main__':
 
     # only add 500 files into our database
     count = 0
-    if len(os.listdir(file_folder)) < NUMBER_OF_HTML_FILES_WANT_TO_ADD:
-        NUMBER_OF_HTML_FILES_WANT_TO_ADD = len(os.listdir(file_folder))
-    for file in os.listdir(file_folder)[:NUMBER_OF_HTML_FILES_WANT_TO_ADD]:
+    # if len(os.listdir(file_folder)) < NUMBER_OF_HTML_FILES_WANT_TO_ADD:
+    #     NUMBER_OF_HTML_FILES_WANT_TO_ADD = len(os.listdir(file_folder))
+    for file in os.listdir(file_folder):  # [:NUMBER_OF_HTML_FILES_WANT_TO_ADD]:
         with open(file_folder + file, 'r') as f:
             try:
                 # extract information from html files
@@ -98,15 +98,17 @@ if __name__ == '__main__':
                 else:
                     desc = ""
 
-                # save data to database
-                book = BookDetail.objects.get_or_create(title=title, author=author, img=img, publisher=publisher,
-                                                        publish_date=publish_date, price=price, language=language,
-                                                        book_type=book_type, ISBN=ISBN, desc=desc, category=categories)[
-                    0]
-                count += 1
-                book.save()
+                if "&#" not in title:
+                    # save data to database
+                    book = BookDetail.objects.get_or_create(title=title, author=author, img=img, publisher=publisher,
+                                                            publish_date=publish_date, price=price, language=language,
+                                                            book_type=book_type, ISBN=ISBN, desc=desc,
+                                                            category=categories)[
+                        0]
+                    count += 1
+                    book.save()
             except Exception as exc:
-                print("error occurred during processing:  ", file)
+                print("Skip:  ", file)
                 print(exc)
 
     # build the category table
