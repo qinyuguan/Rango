@@ -24,7 +24,7 @@ class ProductIndex:
         self.url = url
 
 
-def download_html():
+def download_html(NUMBER_OF_PAGES):
     print("Trying to fetch data from the internet.")
     print("If you encounter any trouble in this step, you can unzip the downloaded.zip directly.")
 
@@ -33,7 +33,7 @@ def download_html():
     all_product_indies = []
 
     # fetch the whole book list
-    for i in range(1, 401):
+    for i in range(1, NUMBER_OF_PAGES):
         list_url = main_page_url + str(i)
         print(list_url)
         response = requests.get(list_url, headers={
@@ -47,7 +47,7 @@ def download_html():
 
     # save urls of every books
     for index in all_product_indies:
-        print('url:\t' + base_url + index.url)
+        print('book url:\t' + base_url + index.url)
         response = requests.get(base_url + index.url, headers={
             'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Mobile Safari/537.36'})
         with open(file_folder + index.url.replace('/', '_') + '.html', 'w') as f:
@@ -55,19 +55,23 @@ def download_html():
 
 
 if __name__ == '__main__':
+    NUMBER_OF_HTML_FILES_WANT_TO_ADD = 200
+    NUMBER_OF_PAGES = 20
     print('Starting Rango population script...')
     file_folder = "./downloaded/"
     # if the html folder doesn't exist, the script will download it.
     if not os.path.exists(file_folder):
         print('downloaded folder doesn\'t exist.')
         os.mkdir(file_folder)
-        download_html()
+        download_html(NUMBER_OF_PAGES)
 
     base_url = 'https://uk.bookshop.org/'
 
     # only add 500 files into our database
     count = 0
-    for file in os.listdir(file_folder)[:1000]:
+    if len(os.listdir(file_folder)) < NUMBER_OF_HTML_FILES_WANT_TO_ADD:
+        NUMBER_OF_HTML_FILES_WANT_TO_ADD = len(os.listdir(file_folder))
+    for file in os.listdir(file_folder)[:NUMBER_OF_HTML_FILES_WANT_TO_ADD]:
         with open(file_folder + file, 'r') as f:
             try:
                 # extract information from html files
